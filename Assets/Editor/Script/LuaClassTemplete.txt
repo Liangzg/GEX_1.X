@@ -1,0 +1,17 @@
+﻿--[[
+	 Author： LiangZG
+	Email :  game.liangzg@foxmail.com
+]]
+
+require "Common.functions"
+
+--[[
+	Desc:
+]]
+
+local tableName = class("tableName")
+
+
+
+return tableName
+

@@ -1,0 +1,8 @@
+﻿--[[
+	 Author： LiangZG
+	Email :  game.liangzg@foxmail.com
+]]
+
+tableName = {}
+local this = tableName
+

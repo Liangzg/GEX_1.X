@@ -1,0 +1,34 @@
+﻿--[[
+	Author： LiangZG
+	Email :  game.liangzg@foxmail.com
+]]
+
+tableName = {}
+local this = tableName
+
+--Update挂点， UpdateBeat:Add(luaFunc)
+local UpdateBeat = UpdateBeat
+
+function tableName.Awake()
+
+
+end
+
+
+function tableName.Start()
+
+
+end
+
+
+
+function tableName.OnGUI()
+
+
+end
+
+
+function tableName.OnDestroy()
+
+end
+
