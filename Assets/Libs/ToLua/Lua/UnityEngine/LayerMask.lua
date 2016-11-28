@@ -31,6 +31,15 @@ function LayerMask.NameToLayer(name)
 	return Layer[name]
 end
 
+function LayerMask.LayerToName( layer )
+	for layerName,_layer in pairs(Layer) do
+		if _layer == layer then	
+			return layerName
+		end
+	end
+	return nil
+end
+
 function LayerMask.GetMask(...)
 	local arg = {...}
 	local value = 0	

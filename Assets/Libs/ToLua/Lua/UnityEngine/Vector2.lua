@@ -3,7 +3,15 @@
 --      All rights reserved.
 --      Use, modification and distribution are subject to the "MIT License"
 --------------------------------------------------------------------------------
-
+local math  = math
+local acos	= math.acos
+local sqrt 	= math.sqrt
+local max 	= math.max
+local min 	= math.min
+local clamp = Mathf.Clamp
+local cos	= math.cos
+local sin	= math.sin
+local abs	= math.abs
 local sqrt = Mathf.Sqrt
 local setmetatable = setmetatable
 local rawset = rawset
@@ -53,6 +61,10 @@ function Vector2:Clone()
 	return Vector2.New(self.x, self.y)
 end
 
+function Vector2.Distance(va, vb)
+    return sqrt((va.x - vb.x)^2 + (va.y - vb.y)^2)
+end
+
 function Vector2:Normalize()
 	local v = self:Clone()
 	return v:SetNormalize()	
@@ -76,8 +88,9 @@ function Vector2.Dot(lhs, rhs)
 	return lhs.x * rhs.x + lhs.y * rhs.y
 end
 
+
 function Vector2.Angle(from, to)
-	return acos(clamp(Vector2.dot(from:Normalize(), to:Normalize()), -1, 1)) * 57.29578
+	return acos(clamp(Vector2.Dot(from:Normalize(), to:Normalize()), -1, 1)) * 57.29578
 end
 
 
@@ -110,7 +123,11 @@ function Vector2:Sub(b)
 	self.x = self.x - b.x
 	self.y = self.y - b.y
 	
-	return
+	return self
+end
+
+function Vector2:ToVector3()
+    return Vector3.New(self.x , self.y)
 end
 
 Vector2.__tostring = function(self)
@@ -145,6 +162,7 @@ get.up 		= function() return Vector2.New(0,1) end
 get.right	= function() return Vector2.New(1,0) end
 get.zero	= function() return Vector2.New(0,0) end
 get.one		= function() return Vector2.New(1,1) end
+get.down	= function() return Vector2.New(0,-1) end
 
 get.magnitude 		= Vector2.Magnitude
 get.normalized 		= Vector2.Normalize

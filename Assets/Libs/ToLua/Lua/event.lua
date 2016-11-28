@@ -176,8 +176,8 @@ setmetatable(_event, _event)
 function event(name, safe)
 	local ev 	= {name = name}	
 	ev.keepSafe	= safe or false
-	ev.rmList	= list:new()	
-	ev.list		= list:new()
+	ev.rmList	= linkList:new()	
+	ev.list		= linkList:new()
 	setmetatable(ev, _event)			
 	return ev
 end

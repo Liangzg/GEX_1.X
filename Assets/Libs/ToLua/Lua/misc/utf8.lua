@@ -303,4 +303,21 @@ function utf8.sanitize(s, repl_char)
 	return utf8.replace(s, replace_invalid, repl_char)
 end
 
+--转化Byte[]为utf8的字符 , 注意可能是C#层的byte[]是数组
+function utf8.convertBytes(byteArrayTable)
+    
+    local byteArrType = type(byteArrayTable)
+    if byteArrType ~= "table" then
+        byteArrayTable = byteArrayTable:ToTable()
+    end
+
+    local byteArr = {}
+    for _ , v in ipairs(byteArrayTable) do
+        local utf8byte = v < 0 and (0xff + v + 1) or v
+       table.insert(byteArr , string.char(utf8byte)) 
+    end
+
+    return table.concat(byteArr)
+end
+
 return utf8

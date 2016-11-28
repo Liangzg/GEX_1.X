@@ -21,8 +21,9 @@ mt.__declared = {}
 mt.__newindex = function (t, n, v)
   if not mt.__declared[n] then
     local info = getinfo(2, "S")
-    if info and info.linedefined > 0 then
-      error("assign to undeclared variable '"..n.."'", 2)
+    
+    if info.what ~= 'main' and info.what ~= 'C' and info.linedefined > 0 then
+      error("assign to undeclared variable '"..n.."'" .. ' what ' .. info.what, 2)
     end
     mt.__declared[n] = true
   end

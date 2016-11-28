@@ -178,6 +178,10 @@ function Color.RGBToHSV(rgbColor)
     end
 end
 
+function Color.RGBA255(r , g , b , a)
+  return Color.New(r / 255 , g / 255 , b / 255 , a / 255)
+end
+
 function Color.GrayScale(a)
 	return 0.299 * a.r + 0.587 * a.g + 0.114 * a.b
 end

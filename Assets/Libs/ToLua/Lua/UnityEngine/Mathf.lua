@@ -131,6 +131,10 @@ function Mathf.LerpAngle(a, b, t)
 	return a + num * Mathf.Clamp01(t)
 end
 
+function Mathf.LerpUnclamped(a, b, t)
+    return a + (b - a) * t;
+end
+
 function Mathf.MoveTowards(current, target, maxDelta)
 	if abs(target - current) <= maxDelta then
 		return target
@@ -168,6 +172,7 @@ function Mathf.Sign(num)
 
 	return num
 end
+
 
 function Mathf.SmoothDamp(current, target, currentVelocity, smoothTime, maxSpeed, deltaTime)
 	maxSpeed = maxSpeed or Mathf.Infinity
@@ -213,6 +218,10 @@ end
 
 function Mathf.IsNan(number)
 	return not (number == number)
+end
+
+function Mathf.ToInt(number)
+    return (number < 0 and math.ceil(number)) or math.floor(number)
 end
 
 UnityEngine.Mathf = Mathf

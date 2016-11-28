@@ -30,7 +30,7 @@ LayerMask	= require "UnityEngine.LayerMask"
 Plane		= require "UnityEngine.Plane"
 Time		= require "UnityEngine.Time"
 
-list		= require "list"
+linkList		= require "Collections.linkList"
 utf8		= require "misc.utf8"
 
 require "event"
@@ -41,7 +41,7 @@ require "System.coroutine"
 require "System.ValueType"
 require "System.Reflection.BindingFlags"
 
---require "misc.strict"
+require "misc.strict"
 require "UnityEngines"  --导入UnityEngine库
 require "GEngine"   --导入引擎模块
 require "GameScript"    --导入游戏功能模块

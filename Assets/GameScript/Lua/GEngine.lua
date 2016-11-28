@@ -3,6 +3,6 @@
 ]]
 
 require "functions"
-require "EventManager"
+require "engineInit"
 
 UIManager = UIManager.Instance

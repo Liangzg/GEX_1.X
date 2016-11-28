@@ -143,7 +143,6 @@ function class(classname, super)
     return cls
 end
 
-print("load class file ")
 
 -- 提供假名以避免和 moonscript 发生冲突
 function quick_class(classname, super)
@@ -181,6 +180,11 @@ function iskindof(obj, classname)
     return false
 end
 
+
+function asClass(obj , classname)
+    return iskindof(obj , classname) and self or nil
+end
+
 --[[--
 载入一个模块
 import() 与 require() 功能相同，但具有一定程度的自动化特性。
@@ -208,7 +212,8 @@ local MyClass = class("MyClass", MyClassBase)
 local Data1 = import(".data.Data1")
 local Data2 = import(".data.Data2")
 ~~~
-当在模块名前面有一个"." 时，import() 会从当前模块所在目录中查找其他模块。因此 MyClass 及其相关文件不管存放到什么目录里，我们都不再需要修改 MyClass 中的 import() 命令。这在开发一些重复使用的功能组件时，会非常方便。
+当在模块名前面有一个"." 时，import() 会从当前模块所在目录中查找其他模块。因此 MyClass 及其相关文件不管存放到什么目录里，我们都不再需要修改 MyClass 中的 import() 命令。
+这在开发一些重复使用的功能组件时，会非常方便。
 我们可以在模块名前添加多个"." ，这样 import() 会从更上层的目录开始查找模块。
 ~
 不过 import() 只有在模块级别调用（也就是没有将 import() 写在任何函数中）时，才能够自动得到当前模块名。如果需要在函数中调用 import()，那么就需要指定当前模块名：
