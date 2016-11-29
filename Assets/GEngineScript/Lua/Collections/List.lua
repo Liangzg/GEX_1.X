@@ -3,8 +3,8 @@
 	Email :  game.liangzg@foxmail.com
 	Desc : 有序list 容器 ， 列表的下标从1开始
 ]]
-local list = class("list")
-local m = list
+local List = class("List")
+local m = List
 
 
 function m:ctor( capactity )
@@ -129,4 +129,4 @@ function m:toString()
 	return table.concat( str, ", ")
 end
 
-return list
+return List

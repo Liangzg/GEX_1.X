@@ -1,4 +1,4 @@
 
 require "Text.string"
 
-stringBuffer = require "Text.stringBuffer"
+stringBuffer = require "Text.StringBuffer"

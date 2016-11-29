@@ -4,7 +4,7 @@
 ]]
 
 
-local task = class("task")
+local task = class("Task")
 local m = task
 
 

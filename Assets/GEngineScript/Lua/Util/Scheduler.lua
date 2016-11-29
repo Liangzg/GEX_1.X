@@ -1,9 +1,9 @@
 --[[
 	调度结点信息结构体
 ]]
-local schedulerNode = class("schedulerNode")
+local SchedulerNode = class("SchedulerNode")
 
-function schedulerNode:ctor()
+function SchedulerNode:ctor()
 	self.delay = 0
 	self.interval = 0
 	self.listener = nil
@@ -23,9 +23,9 @@ local ilist = ilist
 该模块在框架初始化时不会自动载入
 
 ]]
-local scheduler = class("scheduler")
+local Scheduler = class("Scheduler")
 
-function scheduler:ctor()
+function Scheduler:ctor()
 	self.list = linkList:new()
 	self.rmList = linkList:new()
 	self.lock = false
@@ -40,7 +40,7 @@ end
 
 全局帧事件在任何场景中都会执行，因此可以在整个应用程序范围内实现较为精确的全局计时器。
 
-该函数返回的句柄用作 scheduler.remove() 的参数，可以取消指定的计划。
+该函数返回的句柄用作 Scheduler.remove() 的参数，可以取消指定的计划。
 
 @param function 回调函数
 @param bool once 是否仅调用一次  
@@ -48,8 +48,8 @@ end
 @return mixed scheduleNode句柄
 
 ]]
-function scheduler:start(listener , once)
-	local node = schedulerNode.new()
+function Scheduler:start(listener , once)
+	local node = SchedulerNode.new()
 	node.listener = listener
 	node.once = once
 
@@ -68,8 +68,8 @@ end
 @return mixed scheduleNode句柄
 
 ]]
-function scheduler:startInterval(listener, interval)
-	local node = schedulerNode.new()
+function Scheduler:startInterval(listener, interval)
+	local node = SchedulerNode.new()
 	node.listener = listener
 	node.interval = interval
 
@@ -85,7 +85,7 @@ end
 @param mixed scheduleNode句柄
 
 ]]
-function scheduler:remove(handle)
+function Scheduler:remove(handle)
     for i, v in ilist(self.list) do							
 		if v.listener == handle then
 			if self.lock then
@@ -98,7 +98,7 @@ function scheduler:remove(handle)
 end
 
 
-function scheduler:clear( )
+function Scheduler:clear( )
 	self.list = {}
 	self.rmList = {}
 end
@@ -115,11 +115,11 @@ end
 @return mixed scheduleNode句柄
 
 ]]
-function scheduler:startDelay(listener, time , once)
-	local node = schedulerNode.new()
+function Scheduler:startDelay(listener, time , once)
+	local node = SchedulerNode.new()
 	node.listener = listener
-	node.delay = time
-	node.once = once
+	node.delay = time or 0
+	node.once = once or false
 
 	self.list:push(node)
 
@@ -127,7 +127,7 @@ function scheduler:startDelay(listener, time , once)
 end
 
 
-function scheduler:_update( )
+function Scheduler:_update( )
 	local _list = self.list
 	local _rmList = self.rmList
 	self.lock = true
@@ -163,12 +163,12 @@ function scheduler:_update( )
 end
 
 
-function scheduler:destroy( )
+function Scheduler:destroy( )
 	UpdateBeat:Remove(self.updateHandler)
 	
 	self:clear()
 end
 
-scheduler.ins = scheduler.new()
+Scheduler.ins = Scheduler.new()
 
-return scheduler
+return Scheduler

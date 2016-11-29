@@ -20,6 +20,8 @@ end
 
 function this.Start( )
 	-- body
+
+	TimeService.ins:adjustServerTime(os.time())
 end
 
 
@@ -31,38 +33,9 @@ function this.OnGUI(  )
 		this.testList()
 	end	
 	
+	--this.schedulerAPI()
 
-	if GUILayout.Button(" add globalInterval" , GUILayout.Height(30)) then
-
-		local index = 0
-		this.updateFunc = function ( ... )
-			print("log:" .. index)
-
-			index = index + 1
-		end
-		
-		scheduler.ins:startInterval(this.updateFunc , 0.5)
-	end		
-
-	if GUILayout.Button("remove globalInterval" , GUILayout.Height(30)) then
-		scheduler.ins:remove(this.updateFunc)
-	end	
-
-	if GUILayout.Button(" start once" , GUILayout.Height(30)) then
-		scheduler.ins:start(function (  )
-			-- body
-			print(" do once ")
-		end , true)
-	end
-
-	if GUILayout.Button(" start delay" , GUILayout.Height(30)) then
-		print(" start delay ")
-		scheduler.ins:startDelay(function (  )
-			-- body
-			print(" delay func")
-
-		end , 1 , true)
-	end
+	this.timerGUI()
 end
 
 
@@ -121,4 +94,82 @@ function this.testList()
 	mList:removeAt(2)	
 	print("size:" .. mList:size() .. " , allValue:" .. mList:toString())
 	
+end
+
+
+function this.schedulerAPI( )
+	if GUILayout.Button(" add globalInterval" , GUILayout.Height(30)) then
+
+		local index = 0
+		this.updateFunc = function ( ... )
+			print("log:" .. index)
+
+			index = index + 1
+		end
+		
+		Scheduler.ins:startInterval(this.updateFunc , 0.5)
+	end		
+
+	if GUILayout.Button("remove globalInterval" , GUILayout.Height(30)) then
+		Scheduler.ins:remove(this.updateFunc)
+	end	
+
+	if GUILayout.Button(" start once" , GUILayout.Height(30)) then
+		Scheduler.ins:start(function (  )
+			-- body
+			print(" do once ")
+		end , true)
+	end
+
+	if GUILayout.Button(" start delay" , GUILayout.Height(30)) then
+		print(" start delay ")
+		Scheduler.ins:startDelay(function (  )
+			-- body
+			print(" delay func")
+
+		end , 1 , true)
+	end
+end
+
+
+
+function this.timerGUI( )
+	if GUILayout.Button("start time second" , GUILayout.Height(30)) then
+		local timer = Timer.new()
+		local curTime = TimeService.ins:totalMillisecondNow() / 1000
+		timer:setBeginTime(curTime , 10 , eTimeUnit.Second)
+		local index = 0
+		timer.changeFunc = function ( ... )
+			index = index + 1
+
+			print("time:" .. index)
+		end
+		timer:start()
+	end
+
+	if GUILayout.Button("start time milliSecond" , GUILayout.Height(30)) then
+		local timer = Timer.new()
+		local curTime = TimeService.ins:totalMillisecondNow() / 1000
+		timer:setBeginTime(curTime , 1 , eTimeUnit.MilliSecond)
+		local index = 0
+		timer.changeFunc = function ( ... )
+			index = index + 1
+
+			print("time:" .. index)
+		end
+		timer:start()
+	end
+
+	if GUILayout.Button("start time custom" , GUILayout.Height(30)) then
+		local timer = Timer.new()
+		local curTime = TimeService.ins:totalMillisecondNow() / 1000
+		timer:setBeginTime(curTime , 10 , 1.2)
+		local index = 0
+		timer.changeFunc = function ( ... )
+			index = index + 1
+
+			print("custom time:" .. index)
+		end
+		timer:start()
+	end	
 end

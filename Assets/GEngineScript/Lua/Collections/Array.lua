@@ -4,12 +4,12 @@
 	Desc : 有序Array容器 ， 列表的下标从1开始
 ]]
 
-local array=class("array")
+local Array=class("Array")
 
-array.NUMERIC=16
-array.length=0
+Array.NUMERIC=16
+Array.length=0
 
-function array:ctor(...)
+function Array:ctor(...)
 	local args={...}
 	self.length=_G.table.maxn(args)
 	for i=1,self.length do
@@ -22,8 +22,8 @@ function array:ctor(...)
 end
 
 
-function array:splice(...)
-	local arr2=array.new()
+function Array:splice(...)
+	local arr2=Array.new()
 	local args={...}
 	local n1=args[1] or self.length
 	if n1<0 then n1=self.length+n1 end
@@ -45,30 +45,30 @@ function array:splice(...)
 	return arr2
 end
 
-function array:push(...)
+function Array:push(...)
 	self:splice(self.length,0,...)
 	return self.length
 end
 
-function array:shift()
+function Array:shift()
 	local v=self[0]
 	self:splice(0,1)
 	return v
 end
 
-function array:unshift(...)
+function Array:unshift(...)
 	self:splice(0,0,...)
 	return self.length
 end
 
-function array:pop()
+function Array:pop()
 	local v=self[self.length-1]
 	self:splice(self.length-1,1)
 	return v
 end
 
-function array:slice(b,e)
-	local arr=array.new()
+function Array:slice(b,e)
+	local arr=Array.new()
 
 	if b==nil then b=0 end
 	if e==nil then e=self.length end
@@ -85,7 +85,7 @@ function array:slice(b,e)
 	return arr
 end
 
-function array:join(s)
+function Array:join(s)
 	local str=""
 	for i=1,self.length do
 		str=str.._G.tostring(self[i-1])
@@ -94,14 +94,14 @@ function array:join(s)
 	return str
 end
 
-function array:indexOf(v)
+function Array:indexOf(v)
 	for i=0,self.length-1 do
 		if self[i]==v then return i end
 	end
 	return -1
 end
 
-function array:reverse()
+function Array:reverse()
 	local t={}
 	for i=0,self.length-1 do
 		t[i]=self[i]
@@ -112,7 +112,7 @@ function array:reverse()
 end
 
 
-function array:sort()
+function Array:sort()
 	local count = self.length -1
 	while count > 0 do
 		local k = 0
@@ -129,7 +129,7 @@ function array:sort()
 end
 
 
-function array:sortOn(names,options)
+function Array:sortOn(names,options)
 	local count = self.length -1
 	while count > 0 do
 		local k = 0
@@ -152,7 +152,7 @@ function array:sortOn(names,options)
 end
 
 
-function array:concat(arr)
+function Array:concat(arr)
 	local a= self:slice(0,self.length)
 	local len = a.length
 	for i=0,arr.length do
@@ -163,7 +163,7 @@ function array:concat(arr)
 end
 
 
-function array:toString()
+function Array:toString()
 	return self:join(",")
 end
-return array
+return Array

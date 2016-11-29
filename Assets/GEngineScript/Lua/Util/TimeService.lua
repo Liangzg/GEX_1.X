@@ -125,12 +125,12 @@ function m:changeTimeStampToStr(time)
     local hourStr  = ''
     local minStr   = ''
     
-    yearStr  = tostring(tm:year)
-    monthStr = string.format("%2d" , tm:month)
-    dayStr = string.format("%2d" , tm:dayStr)
-    hourStr = string.format("%2d" , tm:hourStr)
-    minStr = string.format("%2d" , tm:minStr)
-    secStr = string.format("%2d" , tm:secStr)
+    yearStr  = tostring(tm.year)
+    monthStr = string.format("%2d" , tm.month)
+    dayStr = string.format("%2d" , tm.day)
+    hourStr = string.format("%2d" , tm.hour)
+    minStr = string.format("%2d" , tm.min)
+    secStr = string.format("%2d" , tm.sec)
     
     return yearStr.."."..monthStr.."."..dayStr.." "..hourStr..":"..minStr
 end
@@ -146,12 +146,12 @@ function m:timeToStrOnly()
     local hourStr  = ''
     local minStr   = ''
     local secStr   = ''
-    yearStr  = tostring(tm:year)
-    monthStr = string.format("%2d" , tm:month)
-    dayStr = string.format("%2d" , tm:dayStr)
-    hourStr = string.format("%2d" , tm:hourStr)
-    minStr = string.format("%2d" , tm:minStr)
-    secStr = string.format("%2d" , tm:secStr)
+    yearStr  = tostring(tm.year)
+    monthStr = string.format("%2d" , tm.month)
+    dayStr = string.format("%2d" , tm.day)
+    hourStr = string.format("%2d" , tm.hour)
+    minStr = string.format("%2d" , tm.min)
+    secStr = string.format("%2d" , tm.sec)
 
     return yearStr..monthStr..dayStr..hourStr..minStr..secStr
 end
