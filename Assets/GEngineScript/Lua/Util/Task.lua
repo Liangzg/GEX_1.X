@@ -4,8 +4,8 @@
 ]]
 
 
-local task = class("Task")
-local m = task
+local Task = class("Task")
+local m = Task
 
 
 function m:ctor(  )
@@ -25,5 +25,5 @@ function m:destroy()
 	-- body
 end
 
-return task
+return Task
 

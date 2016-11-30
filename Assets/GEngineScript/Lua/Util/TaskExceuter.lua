@@ -3,11 +3,9 @@
 	Desc : 任务执行器
 ]]
 
-local task = import(".task")
-
-local taskExeuter = class("taskExeuter" , task)
-local m = taskExeuter
+local TaskExeuter = class("TaskExeuter" , Task)
+local m = TaskExeuter
 
 
 
-return taskExeuter
+return TaskExeuter

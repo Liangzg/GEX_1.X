@@ -4,166 +4,163 @@
 	Desc : 有序Array容器 ， 列表的下标从1开始
 ]]
 
-local Array=class("Array")
+local rawget = rawget
 
-Array.NUMERIC=16
-Array.length=0
+local Array = {}
 
-function Array:ctor(...)
-	local args={...}
-	self.length=_G.table.maxn(args)
-	for i=1,self.length do
-		self[i-1]=args[i]
+Array.__index = function ( t , k )
+	local var = rawget(Array, k)
+	if var == nil then
+		var = t._array_[k]
 	end
-	if typeof(self[0])=="string" and _G.string.find(self[0],"#=")==1 then
-		self.length=_G.tonumber(_G.string.sub(self[0],3))
-		self[0]=nil
+	return var
+end
+
+Array.__newindex = function ( t , k ,v )			
+	if nil == t._array_[k] then
+		error(string.format("%s index out of range ." , k))
+		return 
+	end
+
+	if nil == v then
+		print("cant not remove element by use 'nil' . ")
+		return 
+	end
+
+	rawset(t._array_ ,k, v)
+end
+
+
+-- Array.__call = function ( t , ... )
+-- 	return Array.new( unpack{...})
+-- end	
+
+function Array.new( ... )	
+	local newArray = { _array_ = {...} }
+	setmetatable(newArray , Array)
+	return newArray
+end
+
+
+function Array:removeAt( index )
+	table.removeAt(self._array_ , index)
+end
+
+
+function Array:insert( index , item )
+	index = Mathf.Min(index , #self._array_ + 1)
+	table.insert(self._array_ , index , item)
+end
+
+
+function Array:length()
+	return #self._array_
+end
+
+--对象是否是数组
+function Array.isArray(obj)
+	if type(obj) ~= "table" then	return false	end
+
+	local i = 0
+	for _ in pairs(obj) do
+	 	i = i + 1
+	 	if obj[i] == nil then	return false end
+	end 
+	return true
+end
+
+--是否为空，true为空
+function Array.isEmpty( obj )
+	return Array.isArray(obj) and obj:length() == 0
+end
+
+--切割数组,返回一个新的数组句柄，不影响原数组
+-- @ [number] startIndex > 0 下标从1开始
+function Array:slice( array , startIndex , endIndex )
+	if Array.isEmpty(array) then	return nil end
+
+	local newArr = Array.new()
+	endIndex = endIndex or array:length()
+	for i=startIndex,endIndex do
+		newArr:insert(newArr:length() , array[i])
+	end
+	return newArr
+end
+
+--添加多个元素
+function Array:append( ... )
+	local elements = {...}
+	for i=1,#elements do
+		table.insert(self._array_ , #self._array_)
 	end
 end
 
-
-function Array:splice(...)
-	local arr2=Array.new()
-	local args={...}
-	local n1=args[1] or self.length
-	if n1<0 then n1=self.length+n1 end
-	n1=Math.max(n1,0)+1
-	local n2=args[2] or self.length
-	_G.table.remove(args,1)
-	_G.table.remove(args,1)
-	_G.table.insert(self,1,self[0])
-	for i=1,n2 do
-		arr2:push(self[n1])
-		_G.table.remove(self,n1)
-	end
-	for i=#args,1,-1 do
-		_G.table.insert(self,n1,args[i])
-	end
-	self.length=#self
-	self[0]=self[1]
-	_G.table.remove(self,1)
-	return arr2
-end
-
-function Array:push(...)
-	self:splice(self.length,0,...)
-	return self.length
-end
-
-function Array:shift()
-	local v=self[0]
-	self:splice(0,1)
-	return v
-end
-
-function Array:unshift(...)
-	self:splice(0,0,...)
-	return self.length
-end
-
-function Array:pop()
-	local v=self[self.length-1]
-	self:splice(self.length-1,1)
-	return v
-end
-
-function Array:slice(b,e)
-	local arr=Array.new()
-
-	if b==nil then b=0 end
-	if e==nil then e=self.length end
-	
-	if b<0 then b=Math.max(self.length+b,0) end
-	if e<0 then e=Math.max(self.length+e,0) end
-	local count=0
-	for i=b,e-1 do
-		if self[i]==nil then break end
-		arr[i-b]=self[i]
-		count=count+1
-	end
-	arr.length=count;
-	return arr
-end
-
-function Array:join(s)
-	local str=""
-	for i=1,self.length do
-		str=str.._G.tostring(self[i-1])
-		if i<self.length then str=str..s end
-	end
-	return str
-end
-
-function Array:indexOf(v)
-	for i=0,self.length-1 do
-		if self[i]==v then return i end
+function Array:indexOf( value )
+	for i,v in ipairs(self._array_) do
+		if v == value then	return i end
 	end
 	return -1
 end
 
+
+--反转
 function Array:reverse()
-	local t={}
-	for i=0,self.length-1 do
-		t[i]=self[i]
+	local newArr = Array.new()
+	for i=self:length() , 1 , -1 do
+		newArr:insert(newArr:length() , self._array_[i])
 	end
-	for i=0,self.length-1 do
-		self[i]=t[self.length-1-i]
-	end
+	return newArr
 end
 
 
-function Array:sort()
-	local count = self.length -1
-	while count > 0 do
-		local k = 0
-		for i=0,count-1 do 
-			if self[i] > self[i + 1] then 
-				local t = self[i]
-				self[i] = self[i + 1]
-				self[i + 1] = t
-				k = i 
-			end 
-		end 
-		count = k
-	end
+function Array:first()
+	return self._array_[1]
+end
+
+function Array:last( )
+	return self._array_[#self._array_]
+end
+
+--删除第一个元素，并返回删除元素
+function Array:shift( )
+	local v = self._array_[1]
+	self:removeAt(1)
+	return v
+end
+
+--在第一个位置处插入指定元素，并返回当前数组大小
+function Array:unshift( v )
+	self:insert(1 , v)
+	return self:length()
 end
 
 
-function Array:sortOn(names,options)
-	local count = self.length -1
-	while count > 0 do
-		local k = 0
-		for i=0,count-1 do
-			local v1=self[i][names]
-			local v2=self[i+1][names]
-			if options==16 then
-				v1=_G.tonumber(v1) or 0
-				v2=_G.tonumber(v2) or 0
-			end
-			if v1 > v2 then 
-				local t = self[i]
-				self[i] = self[i + 1]
-				self[i + 1] = t
-				k = i 
-			end 
-		end 
-		count = k
+function Array.copy( srcArray , srcIndex , destArray , destIndex , length )
+	local j = destIndex
+	for i=srcIndex,srcIndex + length do		
+		destArray:insert(j , srcArray[i])
+		j = j + 1
+	end
+end
+
+--将当前一维 Array 的所有元素复制到指定的一维 Array 中（从指定的目标 Array 索引开始)
+function Array:copyTo( array , startIndex )
+	for i=1,#self._array do
+		array:insert(startIndex + i - 1, self._array_[i])
 	end
 end
 
 
-function Array:concat(arr)
-	local a= self:slice(0,self.length)
-	local len = a.length
-	for i=0,arr.length do
-		a[len+i]=arr[i]
+function Array:toString( )	
+	local str = {}
+	for k,v in ipairs(self._array_) do
+		table.insert(str , tostring(v))
 	end
-	a.length = a.length+arr.length
-	return a;
+	return table.concat( str, ", ")
 end
 
 
-function Array:toString()
-	return self:join(",")
-end
+
+
+
 return Array
