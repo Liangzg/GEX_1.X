@@ -36,14 +36,26 @@ end
 -- end	
 
 function Array.new( ... )	
-	local newArray = { _array_ = {...} }
+	local args = {...}
+	local newArray = { typeof = "Array"}
+	--print("args:" .. print_lua_table(args) .. " , args[1] :" .. type(args[1]))
+	if type(args[1]) == "table" and #args == 1 then
+		newArray._array_ = {}
+		if Array.isArray(args[1]) then
+			for _,v in ipairs(args[1]) do			
+				table.insert(newArray._array_ , v)
+			end
+			--print("args:" .. print_lua_table(args[1]) .. ", arrayLenth:" .. #newArray._array_)
+		end
+	else
+		newArray._array_ = args
+	end
 	setmetatable(newArray , Array)
 	return newArray
 end
 
-
 function Array:removeAt( index )
-	table.removeAt(self._array_ , index)
+	table.remove(self._array_ , index)
 end
 
 
@@ -61,6 +73,8 @@ end
 function Array.isArray(obj)
 	if type(obj) ~= "table" then	return false	end
 
+	if obj.typeof == "Array" then	return true	end
+
 	local i = 0
 	for _ in pairs(obj) do
 	 	i = i + 1
@@ -76,13 +90,13 @@ end
 
 --切割数组,返回一个新的数组句柄，不影响原数组
 -- @ [number] startIndex > 0 下标从1开始
-function Array:slice( array , startIndex , endIndex )
+function Array.slice( array , startIndex , endIndex )
 	if Array.isEmpty(array) then	return nil end
 
 	local newArr = Array.new()
 	endIndex = endIndex or array:length()
 	for i=startIndex,endIndex do
-		newArr:insert(newArr:length() , array[i])
+		newArr:insert(newArr:length() + 1, array[i])
 	end
 	return newArr
 end
@@ -90,10 +104,15 @@ end
 --添加多个元素
 function Array:append( ... )
 	local elements = {...}
+	if #elements == 1 and type(elements[1]) == "table" then
+		elements = elements[1]
+	end
+
 	for i=1,#elements do
-		table.insert(self._array_ , #self._array_)
+		table.insert(self._array_ , #self._array_ + 1, elements[i])
 	end
 end
+
 
 function Array:indexOf( value )
 	for i,v in ipairs(self._array_) do
@@ -107,7 +126,7 @@ end
 function Array:reverse()
 	local newArr = Array.new()
 	for i=self:length() , 1 , -1 do
-		newArr:insert(newArr:length() , self._array_[i])
+		newArr:insert(newArr:length() + 1, self._array_[i])
 	end
 	return newArr
 end
@@ -135,18 +154,25 @@ function Array:unshift( v )
 end
 
 
+function Array:clear( )
+	self._array_ = {}
+end
+
+
 function Array.copy( srcArray , srcIndex , destArray , destIndex , length )
 	local j = destIndex
-	for i=srcIndex,srcIndex + length do		
-		destArray:insert(j , srcArray[i])
+	for i=srcIndex,srcIndex + length - 1 do		
+		destArray:insert(j, srcArray[i])
 		j = j + 1
 	end
 end
 
 --将当前一维 Array 的所有元素复制到指定的一维 Array 中（从指定的目标 Array 索引开始)
 function Array:copyTo( array , startIndex )
-	for i=1,#self._array do
-		array:insert(startIndex + i - 1, self._array_[i])
+	local j = 0
+	for i=startIndex,#self._array_ do
+		j = j + 1
+		array:insert(array:length() + j , self._array_[i])
 	end
 end
 

@@ -179,28 +179,11 @@ end
 
 
 function this.arrayGUI(  )
-	if GUILayout.Button(" new Array " , GUILayout.Height(30)) then
-		local array = Array.new( 1, 2, 3)
-
-		print(array:toString())
-
-		array:insert(1 , 0)
-
-		print(array:toString())
-
-		array[1] = nil
-		print(array:toString())
+	if GUILayout.Button(" Test Array " , GUILayout.Height(30)) then
+		require "Collection.ArrayTest"
 	end	
 
-	if GUILayout.Button(" remove Array " , GUILayout.Height(30)) then
-		local array = Array.new( 1, 2, 3)
-
-		print("array[1]:" .. array[1])
-		array[3] = nil		
-		array[3] = 4		
-		print(array:toString())
-
-		array:insert(1 , 0)
-		print(array:toString())
-	end
+	if GUILayout.Button(" Test Queue " , GUILayout.Height(30)) then
+		require "Collection.QueueTest"
+	end	
 end

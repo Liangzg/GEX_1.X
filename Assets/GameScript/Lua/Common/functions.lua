@@ -150,7 +150,71 @@ end
 
 
 
+function internale(lua_table,indent,depth,isLimit)
+  local str = {}
+  local prefix = string.rep("    ", indent)
+  table.insert(str,"\n"..prefix.."{\n")
+  for k, v in pairs(lua_table) do
+      if type(k) == "string" then
+          k = string.format("%q", k)
+      else 
+          k = string.format("%s", tostring(k))
+      end
 
+      local szSuffix = ""
+
+      if type(v) == "string" then
+          szSuffix = string.format("%q", v)
+      elseif type(v) == "number" or type(v) == "userdata" then
+          szSuffix = tostring(v)
+      elseif type(v) == "table" then
+          if isLimit then
+              if (depth > 0) then
+                  szSuffix = internale(v,indent + 1,depth - 1,isLimit)
+              else
+                  szSuffix = tostring(v)
+              end
+          else   
+
+              szSuffix = print_lua_table(v,indent + 1,depth - 1)
+          end
+      else
+         szSuffix = tostring(v)
+      end
+
+      local szPrefix = string.rep("    ", indent+1)
+      table.insert(str,szPrefix.."["..k.."]".." = "..szSuffix..",\n")
+   end
+
+   table.insert(str,prefix.."}\n")
+   return table.concat(str, '')
+end
+
+--輸出信息，缩进，遍历深度,不设置上限
+function print_lua_table(lua_table, indent,depth,isLimit)
+    indent = indent or 0
+    depth = depth or 1
+    isLimit = isLimit or false
+    local str = ""
+
+    if lua_table == nil then
+        str = tostring(lua_table)
+    end
+
+    if type(lua_table) == "string" then
+        str = string.format("%q", lua_table)
+    end
+
+    if type(lua_table) == "userdata" or type(lua_table) == "number" or type(lua_table) == "function" or type(lua_table) == "boolean" then
+        str = tostring(lua_table)
+    end
+    
+    if type(lua_table) == "table" then 
+        str = internale(lua_table,indent,depth,isLimit)
+    end
+
+    return str 
+end
 
 
 
