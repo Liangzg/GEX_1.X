@@ -48,6 +48,8 @@ function coroutine.start(f, ...)
 	return co
 end
 
+
+
 function coroutine.wait(t, co, ...)
 	local args = {...}
 	co = co or running()		
@@ -92,6 +94,63 @@ function coroutine.step(t, co, ...)
 	return yield()
 end
 
+--用于多层协同嵌套
+--eg:
+-- function onA()
+-- 	print("a start")
+-- 	coroutine.next(onB)
+-- 	print("a end")
+-- end
+
+-- function onB()
+-- 	print("b start")
+-- 	coroutine.next(onC)
+-- 	print("b end")
+-- end
+
+-- function onC()
+-- 	print("c")
+-- end
+
+-- coroutine.start(onA)
+
+-- --->output:
+-- a start
+-- b start
+-- c
+-- b end
+-- a end
+
+function coroutine.next( f , ... )
+	local curCo = running()
+	if comap[curCo] then		
+		comap[curCo]:Stop()
+	end
+
+	local timer = nil
+	local co = nil	
+	local action = function()	
+		local state = coroutine.status(co)											
+		if state ~= "dead" then	return end
+		
+		timer:Stop()
+		local flag, msg = resume(curCo)			
+
+		if not flag then				
+			msg = debug.traceback(curCo, msg)				
+			error(msg)						
+		end		
+	end
+		
+	timer = FrameTimer.New(action, 1, -1)
+	comap[curCo] = timer
+	timer:Start()	
+
+	co = coroutine.start(f , unpack({...}))
+
+	return yield()
+end
+
 function coroutine.www(www, co)			
 	co = co or running()			
 	local timer = nil			
@@ -116,6 +175,8 @@ function coroutine.www(www, co)
  	timer:Start()
  	return yield()
 end
+
+
 
 function coroutine.stop(co)
  	local timer = comap[co]
