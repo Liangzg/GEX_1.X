@@ -258,3 +258,20 @@ function import(moduleName, currentModuleName)
 
     return require(moduleFullName)
 end
+
+
+
+function implement( srcObj , interface )
+    local function _copy(object)
+        if type(object) ~= "table" then
+            return object
+        elseif srcObj[object] then
+            return srcObj[object]
+        end
+
+        for key, value in pairs(object) do            
+            srcObj[_copy(key)] = _copy(value)
+        end
+    end
+    _copy(interface)
+end

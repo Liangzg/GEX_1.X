@@ -37,7 +37,9 @@ function this.OnGUI(  )
 
 	--this.timerGUI()
 
-	this.arrayGUI()
+	--this.arrayGUI()
+
+	this.utilGUI()
 end
 
 
@@ -186,4 +188,20 @@ function this.arrayGUI(  )
 	if GUILayout.Button(" Test Queue " , GUILayout.Height(30)) then
 		require "Collection.QueueTest"
 	end	
+	if GUILayout.Button(" Test Stack " , GUILayout.Height(30)) then
+		require "Collection.StackTest"
+	end	
+end
+
+function this.utilGUI(  )
+	
+	if GUILayout.Button(" Test SingleTask " , GUILayout.Height(30)) then
+		require "Util.SingleTaskTest"
+	end	
+	if GUILayout.Button(" Test SerialTask " , GUILayout.Height(30)) then
+		require "Util.SerialTaskTest"
+	end		
+	if GUILayout.Button(" Test ParallelTask " , GUILayout.Height(30)) then
+		require "Util.ParallelTaskTest"
+	end		
 end

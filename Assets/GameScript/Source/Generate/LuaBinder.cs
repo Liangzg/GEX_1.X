@@ -76,6 +76,9 @@ public static class LuaBinder
 		UnityEngine_RenderTextureWrap.Register(L);
 		UnityEngine_GUILayoutWrap.Register(L);
 		UnityEngine_RectTransformWrap.Register(L);
+		L.BeginModule("SceneManagement");
+		UnityEngine_SceneManagement_SceneManagerWrap.Register(L);
+		L.EndModule();
 		L.BeginModule("UI");
 		UnityEngine_UI_TextWrap.Register(L);
 		UnityEngine_UI_MaskableGraphicWrap.Register(L);

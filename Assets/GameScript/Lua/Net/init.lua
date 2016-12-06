@@ -1,5 +1,5 @@
 require('Net/Proto')
-require('Net/Interface')
+require('Net/gInterface')
 require "Net/NetClient"
 Dequeue = require ('Net/Dequeue')
 --��������

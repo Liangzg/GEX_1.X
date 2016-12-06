@@ -93,6 +93,20 @@ function Queue:size()
 	return self._size
 end
 
+function Queue:enumerator( )
+	local i = self._head - 1
+	return function ( )
+		i = i + 1
+		return self._array[i]
+	end
+end
+
+function Queue:getEnumerator( )
+	return Enumerator.new(self._head - 1, 1,  function ( i )
+		return self._array[i]
+	end)
+end
+
 function Queue:toString( )
 	return self._array:toString()
 end

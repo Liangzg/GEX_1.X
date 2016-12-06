@@ -116,4 +116,25 @@ test('contains should returns false when the value is not in the table', functio
 end)
 
 
+test('getEnumerator should returns all element ', function()
+	local queue = Queue.new()
+	queue:enqueue("a")
+	queue:enqueue(1)
+	queue:enqueue("b")
+	queue:enqueue("false")
+
+
+	local str = {}
+	local rator = queue:getEnumerator()	
+
+	while rator:moveNext() do
+		table.insert(str , rator:current())
+	end
+	str = table.concat( str, ",")
+	print("allValue:" .. str)
+
+	assertEqual(str , "a,1,b,false")
+end)
+
+
 

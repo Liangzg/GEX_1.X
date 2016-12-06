@@ -8,3 +8,6 @@ goHelper = import ".goHelper"
 Scheduler = import ".Scheduler"
 TimeService = import ".TimeService"
 Timer = import ".Timer"
+
+import ".TaskRunner.init"
+

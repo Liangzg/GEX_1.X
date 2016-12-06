@@ -109,7 +109,7 @@ function m:copyTo( ... )
 end
 
 --用于遍历
-function m:values()
+function m:enumerator()
 	local index = 0
 	return function ()
 		index = index + 1

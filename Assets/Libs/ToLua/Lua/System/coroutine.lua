@@ -123,6 +123,8 @@ end
 
 function coroutine.next( f , ... )
 	local curCo = running()
+	assert(curCo)
+	
 	if comap[curCo] then		
 		comap[curCo]:Stop()
 	end

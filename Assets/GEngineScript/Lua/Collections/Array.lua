@@ -176,6 +176,15 @@ function Array:copyTo( array , startIndex )
 	end
 end
 
+--迭代器
+function Array:enumerator()
+	local i = 0
+	return function ( )
+		i = i + 1
+		return self._array_[i]
+	end
+end
+
 
 function Array:toString( )	
 	local str = {}

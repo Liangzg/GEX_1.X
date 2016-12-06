@@ -148,11 +148,26 @@ public class LuaUIPageWrap
 	{
 		try
 		{
-			ToLua.CheckArgsCount(L, 2);
-			LuaUIPage obj = (LuaUIPage)ToLua.CheckObject(L, 1, typeof(LuaUIPage));
-			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.GameObject));
-			obj.RemoveClick(arg0);
-			return 0;
+			int count = LuaDLL.lua_gettop(L);
+
+			if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(LuaUIPage), typeof(string)))
+			{
+				LuaUIPage obj = (LuaUIPage)ToLua.ToObject(L, 1);
+				string arg0 = ToLua.ToString(L, 2);
+				obj.RemoveClick(arg0);
+				return 0;
+			}
+			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(LuaUIPage), typeof(UnityEngine.GameObject)))
+			{
+				LuaUIPage obj = (LuaUIPage)ToLua.ToObject(L, 1);
+				UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.ToObject(L, 2);
+				obj.RemoveClick(arg0);
+				return 0;
+			}
+			else
+			{
+				return LuaDLL.luaL_throw(L, "invalid arguments to method: LuaUIPage.RemoveClick");
+			}
 		}
 		catch(Exception e)
 		{

@@ -140,6 +140,7 @@ public static class CustomSettings
         _GT(typeof(RenderSettings)),                                                   
         _GT(typeof(BlendWeights)),           
         _GT(typeof(RenderTexture)),
+        _GT(typeof(UnityEngine.SceneManagement.SceneManager)),
     };
 
     public static List<Type> dynamicList = new List<Type>()
