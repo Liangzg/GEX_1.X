@@ -13,6 +13,7 @@ function UIPageTest.Awake()
 
     AssetLoader.isBundle = false
 
+	print("UIPageTest.Awake")
 end
 
 
