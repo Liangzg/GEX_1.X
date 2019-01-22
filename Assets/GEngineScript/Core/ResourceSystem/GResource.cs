@@ -13,6 +13,8 @@ namespace GEX.Resource
 {
     public static class GResource
     {
+        public static string RuntimeAssetsRoot = "Assets/RuntimeAssets/";
+
 #if UNITY_EDITOR
         private static Dictionary<string, UIAtlasCache> atlasMap = new Dictionary<string, UIAtlasCache>();
 #endif
@@ -30,7 +32,7 @@ namespace GEX.Resource
             {
                 return new LoadBundleAsync(null, assetName, extension);
             }
-            string assetPath = string.Concat("Assets/Res/", assetName, extension);
+            string assetPath = string.Concat(RuntimeAssetsRoot, assetName, extension);
 
             return new LoadEditorAssetAsync(assetPath);
         }
@@ -47,7 +49,7 @@ namespace GEX.Resource
             {
                 return new LoadBundleAsync(owner, assetName, extension);
             }
-            string assetPath = string.Concat("Assets/Res/", assetName, extension);
+            string assetPath = string.Concat(RuntimeAssetsRoot, assetName, extension);
 
             return new LoadEditorAssetAsync(assetPath);
         }
@@ -70,7 +72,7 @@ namespace GEX.Resource
 //            GameObject prefab = cachePool.GetCachePrefab(prefabName);
 //            if (prefab != null)
 //            {
-//                string assetPath = string.Concat("Assets/Res/", assetName, extension);
+//                string assetPath = string.Concat(RuntimeAssetsRoot, assetName, extension);
 //                return new LoadAssetAsync(prefab , assetPath);
 //            }
 //            return LoadBundleAsync(null, assetName, extension);
@@ -94,7 +96,7 @@ namespace GEX.Resource
 //            GameObject prefab = cachePool.GetCachePrefab(prefabName);
 //            if (prefab != null)
 //            {
-//                string assetPath = string.Concat("Assets/Res/", assetName, extension);
+//                string assetPath = string.Concat(RuntimeAssetsRoot, assetName, extension);
 //                return new LoadAssetAsync(prefab, assetPath);
 //            }
 //            return LoadBundleAsync(owner, assetName, extension);
@@ -180,7 +182,7 @@ namespace GEX.Resource
                 go = AssetBundleManager.Instance.LoadPrefab(assetName);
 #if UNITY_EDITOR
             else
-                go = AssetDatabase.LoadAssetAtPath<GameObject>(string.Format("Assets/Res/{0}.prefab", assetName));
+                go = AssetDatabase.LoadAssetAtPath<GameObject>(string.Format("{0}{1}.prefab", RuntimeAssetsRoot, assetName));
 #endif
             return go;
         }
@@ -217,7 +219,7 @@ namespace GEX.Resource
             string extension = Path.GetExtension(assetName);
             if (!string.IsNullOrEmpty(extension))
                 assetName = assetName.Replace(extension, "");
-            TextAsset textAss = AssetDatabase.LoadAssetAtPath<TextAsset>(string.Format("Assets/Res/{0}.bytes", assetName));
+            TextAsset textAss = AssetDatabase.LoadAssetAtPath<TextAsset>(string.Format("{0}{1}.bytes", RuntimeAssetsRoot, assetName));
             return textAss.bytes;
 #endif
             return null;
@@ -233,7 +235,7 @@ namespace GEX.Resource
             if (AppConst.AssetBundleMode)
                 return AssetBundleManager.Instance.LoadTexture(owner, assetPath);
 #if UNITY_EDITOR
-            string fullPath = string.Format("Assets/Res/{0}", assetPath);
+            string fullPath = string.Concat(RuntimeAssetsRoot, assetPath);
             if (!File.Exists(fullPath))
             {
                 Debug.LogError(string.Format("无法找到指定的图片资源！ 路径：{0}", assetPath));
@@ -259,7 +261,7 @@ namespace GEX.Resource
             string extension = Path.GetExtension(assetName);
             if (!string.IsNullOrEmpty(extension))
                 assetName = assetName.Replace(extension, "");
-            T obj = AssetDatabase.LoadAssetAtPath<T>(string.Format("Assets/Res/{0}.asset", assetName));
+            T obj = AssetDatabase.LoadAssetAtPath<T>(string.Concat(RuntimeAssetsRoot ,assetName , ".asset"));
             return obj;
 #endif
             return null;
@@ -289,7 +291,7 @@ namespace GEX.Resource
                 UIAtlasCache atlas = null;
                 if (!atlasMap.TryGetValue(dir, out atlas))
                 {
-                    zstring rootDir = "Assets/Res/" + dir;
+                    zstring rootDir = RuntimeAssetsRoot + dir;
                     string[] textureGuids = AssetDatabase.FindAssets("t:Texture", new string[] { rootDir });
                     List<Sprite> sprites = new List<Sprite>();
                     for (int i = 0; i < textureGuids.Length; i++)
@@ -331,7 +333,7 @@ namespace GEX.Resource
 
             AudioClip clip = null;
 #if UNITY_EDITOR
-            string path = string.Format("Assets/Res/{0}.{1}", name, extension);
+            string path = string.Format("{0}{1}.{2}",RuntimeAssetsRoot, name, extension);
             clip = AssetDatabase.LoadAssetAtPath<AudioClip>(path);
 #endif
             return Promise<AudioClip>.Resolved(clip);

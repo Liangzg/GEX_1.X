@@ -13,7 +13,7 @@ namespace LuaFramework {
         ResourceManager resMgr {
             get { 
                 if (m_resMgr == null)
-                    m_resMgr = AppFacade.Instance.GetManager<ResourceManager>(ManagerName.Resource);
+                    m_resMgr = AppFacade.Instance.GetManager<ResourceManager>();
                 return m_resMgr;
             }
         }

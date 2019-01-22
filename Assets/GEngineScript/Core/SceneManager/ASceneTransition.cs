@@ -3,6 +3,7 @@
 ** Email :  game.liangzg@foxmail.com
 *********************************************************************************/
 using System.Collections;
+using GEX.Resource;
 using UnityEngine;
 
 namespace GOE.Scene
@@ -17,7 +18,7 @@ namespace GOE.Scene
 
         protected SMTransitionState state = SMTransitionState.Out;
 
-        public ASceneLoader Loader;
+        public StageLoader Loader;
 
         /// <summary>
         /// Gets the current state of the transition. This is read-only, as the state is controlled by the transition 
@@ -87,8 +88,7 @@ namespace GOE.Scene
 
                 if (Loader != null)
                 {
-                    IEnumerator loadLevel = Loader.OnLoad(screenName);
-                    while (loadLevel.MoveNext())
+                    while (Loader.MoveNext())
                     {
                         yield return 0;
                     }
@@ -123,8 +123,7 @@ namespace GOE.Scene
             if (!prefetchLevel && Loader != null)
             {
                 // level is not prefetched, load it right now.
-                IEnumerator loadLevel = Loader.OnLoad(screenName);
-                while (loadLevel.MoveNext())
+                while (Loader.MoveNext())
                 {
                     yield return 0;
                 }

@@ -32,7 +32,7 @@ public class UIManager : ASingleton<UIManager>
         if (!fileName.EndsWith(".lua")) fileName += ".lua";
 
         //加载Lua逻辑
-        BaseLuaManager luaMgr = AppFacade.Instance.GetManager<BaseLuaManager>(ManagerName.Lua);
+        BaseLuaManager luaMgr = AppFacade.Instance.GetManager<BaseLuaManager>();
         luaMgr.DoFile(fileName);
 
         //加载界面资源

@@ -26,14 +26,14 @@ namespace LuaFramework {
         /// 面板管理器
         /// </summary>
         public static PanelManager GetPanelManager() {
-            return AppFacade.Instance.GetManager<PanelManager>(ManagerName.Panel);
+            return AppFacade.Instance.GetManager<PanelManager>();
         }
 
         /// <summary>
         /// 资源管理器
         /// </summary>
         public static ResourceManager GetResManager() {
-            return AppFacade.Instance.GetManager<ResourceManager>(ManagerName.Resource);
+            return AppFacade.Instance.GetManager<ResourceManager>();
         }
 
 //        /// <summary>
@@ -47,7 +47,7 @@ namespace LuaFramework {
         /// 音乐管理器
         /// </summary>
         public static SoundManager GetSoundManager() {
-            return AppFacade.Instance.GetManager<SoundManager>(ManagerName.Sound);
+            return AppFacade.Instance.GetManager<SoundManager>();
         }
 
 

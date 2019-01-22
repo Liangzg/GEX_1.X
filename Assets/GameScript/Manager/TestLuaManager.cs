@@ -27,7 +27,7 @@ public class TestLuaManager : MonoBehaviour
     private string tableName;
     void Awake()
     {
-        mLuaMgr = AppFacade.Instance.AddManager<BaseLuaManager>(ManagerName.Lua);
+        mLuaMgr = AppFacade.Instance.AddManager<BaseLuaManager>();
     }
 
     // Use this for initialization

@@ -30,7 +30,7 @@ public sealed class LuaAssetLoader{
 
     public static void LoadGameObjectByName(string resName, AssetLoader.EAssetType assetType, string luaFuncName)
     {
-        BaseLuaManager mgr = AppFacade.Instance.GetManager<BaseLuaManager>(ManagerName.Lua);
+        BaseLuaManager mgr = AppFacade.Instance.GetManager<BaseLuaManager>();
         LuaFunction luaCallback = mgr.GetFunction(luaFuncName);
         LoadGameObjectByName(resName , assetType , luaCallback);
     }

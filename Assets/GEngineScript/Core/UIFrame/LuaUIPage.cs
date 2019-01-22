@@ -23,7 +23,7 @@ public class LuaUIPage : ABaseUIPage
     {
         base.OnAwake(gObj);
 
-        BaseLuaManager luaMgr = AppFacade.Instance.GetManager<BaseLuaManager>(ManagerName.Lua);
+        BaseLuaManager luaMgr = AppFacade.Instance.GetManager<BaseLuaManager>();
         luaMgr.LuaMachine[Name + ".gameObject"] = gObj;
         luaMgr.LuaMachine[Name + ".transform"] = gObj.transform;
         luaMgr.LuaMachine[Name + ".ui"] = this;

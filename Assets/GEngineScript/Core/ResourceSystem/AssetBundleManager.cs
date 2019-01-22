@@ -705,7 +705,7 @@ namespace GEX.Resource
                {
                    if (go == null)
                    {
-                       zstring assetPath = zstring.Format("assets/res/{0}.prefab", assetName);
+                       zstring assetPath = zstring.Concat(GResource.RuntimeAssetsRoot , assetName , ".prefab");
                        throw new Exception(zstring.Format("load prefab error: {0}", assetPath));
                    }
 #if UNITY_EDITOR
@@ -818,8 +818,9 @@ namespace GEX.Resource
                 if (assetbundleMap.TryGetValue(assetName, out bundleName))
                     watcher.AddBundleName(bundleName);
 
-                if (!assetName.StartsWith("assets/res/"))
-                    assetName = zstring.Format("assets/res/{0}", assetPath);
+                string assetRoot = GResource.RuntimeAssetsRoot.ToLower();
+                if (!assetName.StartsWith(assetRoot))
+                    assetName = zstring.Concat(assetRoot, assetPath);
 
                 var asset = bundle.LoadAsset(assetName) as Texture;
                 if (asset == null)
@@ -862,8 +863,10 @@ namespace GEX.Resource
 
                 AssetBundle bundle = TryGetBundleByFile(assetName);
                 if (bundle == null) return null;
-                if (!assetName.StartsWith("assets/res/"))
-                    assetName = zstring.Format("assets/res/{0}", path);
+
+                string assetRoot = GResource.RuntimeAssetsRoot.ToLower();
+                if (!assetName.StartsWith(assetRoot))
+                    assetName = zstring.Concat(assetRoot , path);
 
                 var asset = bundle.LoadAsset(assetName) as T;
                 if (asset == null)
@@ -886,7 +889,7 @@ namespace GEX.Resource
             {
                 using (zstring.Block())
                 {
-                    zstring assetName = zstring.Format("assets/res/{0}.{1}", goName, extension.TrimStart('.'));
+                    zstring assetName = zstring.Format("{0}{1}.{2}", GResource.RuntimeAssetsRoot.ToLower() , goName, extension.TrimStart('.'));
                     var abcr = bundle.LoadAssetAsync(assetName);
                     yield return abcr;
                     var mainAsset = (T)abcr.asset;

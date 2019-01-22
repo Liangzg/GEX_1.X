@@ -86,26 +86,29 @@ public class Facade {
     /// <summary>
     /// 添加Unity对象
     /// </summary>
-    public T AddManager<T>(string typeName) where T : Component {
+    public T AddManager<T>() where T : Component {
+        string typeName = typeof(T).Name;
         object result = null;
-        m_Managers.TryGetValue(typeName, out result);
-        if (result != null) {
-            return (T)result;
-        }
-        T c = AppGameManager.AddComponent<T>();
-        m_Managers.Add(typeName, c);
-        return c;
+        if (!m_Managers.TryGetValue(typeName, out result))
+        {
+            T c = AppGameManager.AddComponent<T>();
+            m_Managers[typeName] = c;
+            result = c;
+        }        
+        return (T)result;
     }
 
     /// <summary>
     /// 获取系统管理器
     /// </summary>
-    public T GetManager<T>(string typeName) where T : class {
-        if (!m_Managers.ContainsKey(typeName)) {
+    public T GetManager<T>() where T : class
+    {
+        string typeName = typeof (T).Name;
+        object manager = null;
+        if (!m_Managers.TryGetValue(typeName, out manager))
+        {
             return default(T);
         }
-        object manager = null;
-        m_Managers.TryGetValue(typeName, out manager);
         return (T)manager;
     }
 

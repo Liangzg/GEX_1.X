@@ -38,7 +38,7 @@ namespace GEX.Resource
 
         public override void OnLoad()
         {
-            loading = SceneManager.LoadSceneAsync(this.assetPath, loadSceneMode);
+            loading = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(this.assetPath, loadSceneMode);
             loading.allowSceneActivation = false;
         }
 
