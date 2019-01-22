@@ -6,7 +6,7 @@ public class AssetLoaderWrap
 {
 	public static void Register(LuaState L)
 	{
-		L.BeginClass(typeof(AssetLoader), typeof(ASignalEntry<AssetLoader>));
+		L.BeginClass(typeof(AssetLoader), typeof(ASingleton<AssetLoader>));
 		L.RegFunction("LoadGameObjectByName", LoadGameObjectByName);
 		L.RegFunction("LoadUI", LoadUI);
 		L.RegFunction("LoadEffect", LoadEffect);

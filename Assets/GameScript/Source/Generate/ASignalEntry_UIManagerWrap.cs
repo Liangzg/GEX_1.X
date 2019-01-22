@@ -6,7 +6,7 @@ public class ASignalEntry_UIManagerWrap
 {
 	public static void Register(LuaState L)
 	{
-		L.BeginClass(typeof(ASignalEntry<UIManager>), typeof(System.Object), "ASignalEntry_UIManager");
+		L.BeginClass(typeof(ASingleton<UIManager>), typeof(System.Object), "ASignalEntry_UIManager");
 		L.RegFunction("__tostring", Lua_ToString);
 		L.RegVar("Instance", get_Instance, null);
 		L.EndClass();
@@ -34,7 +34,7 @@ public class ASignalEntry_UIManagerWrap
 	{
 		try
 		{
-			ToLua.PushObject(L, ASignalEntry<UIManager>.Instance);
+			ToLua.PushObject(L, ASingleton<UIManager>.Instance);
 			return 1;
 		}
 		catch(Exception e)

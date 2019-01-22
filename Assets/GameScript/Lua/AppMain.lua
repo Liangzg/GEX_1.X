@@ -1,15 +1,7 @@
 ﻿--[[
 Author： LiangZG
 Email :  game.liangzg@foxmail.com
-]]
 
-require "Common.functions"
-local Fsm = require "Common.Fsm"
-local UpdateState = require "GameState.UpdateState"
-local LoginState = require "GameState.LoginState"
-local MainState = require "GameState.MainState"
-
---[[
 应用Main入口
 ]]
 AppMain = {}

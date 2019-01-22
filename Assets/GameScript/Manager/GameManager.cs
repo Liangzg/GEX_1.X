@@ -164,7 +164,6 @@ namespace LuaFramework {
         }
 
         void OnInitialize() {
-            LuaManager.DoFile("define.lua");            //载入Lua脚本
             LuaManager.InitStart();
 //            LuaManager.DoFile("Logic/Game");         //加载游戏
 //            LuaManager.DoFile("Logic/Network");      //加载网络

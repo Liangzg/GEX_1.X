@@ -22,7 +22,6 @@ namespace LuaFramework {
 
         void StartMain()
         {
-            
             lua.DoFile("AppMain.lua");
 
             LuaFunction main = lua.GetFunction("AppMain.Main");

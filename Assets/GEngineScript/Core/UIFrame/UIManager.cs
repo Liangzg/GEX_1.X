@@ -12,7 +12,7 @@ using LuaFramework;
 /// 描述：UIPage管理器
 /// <para>创建时间：2016-08-08</para>
 /// </summary>
-public class UIManager : ASignalEntry<UIManager>
+public class UIManager : ASingleton<UIManager>
 {
     //页面缓存列表
     private Dictionary<string , ABaseUIPage> cachePagePool = new Dictionary<string, ABaseUIPage>();

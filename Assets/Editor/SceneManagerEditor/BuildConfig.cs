@@ -98,7 +98,7 @@ public class BuildConfig
 }
 
 
-public class BuildConfigManager : ASignalEntry<BuildConfigManager>
+public class BuildConfigManager : ASingleton<BuildConfigManager>
 {
     private Dictionary<string , BuildConfig> configDic = new Dictionary<string, BuildConfig>(); 
 

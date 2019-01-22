@@ -7,7 +7,7 @@ public static class LuaConst
     //lua逻辑代码目录
     public static string[] luaDirs =
     {
-        Application.dataPath + "/GEngineScript/Lua" ,
+//        Application.dataPath + "/GEngineScript/Lua" ,
         Application.dataPath + "/GameScript/Lua"
     }; 
     public static string toluaDir = Application.dataPath + "/Libs/ToLua/Lua";        //tolua lua文件目录

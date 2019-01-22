@@ -306,7 +306,7 @@ namespace LuaFramework {
             return luaMgr.CallFunction(module + "." + func, args);
         }
 
-                /// <summary>
+        /// <summary>
         /// 检查运行环境
         /// </summary>
         public static bool CheckEnvironment() {
@@ -328,6 +328,36 @@ namespace LuaFramework {
             }
 #endif
             return true;
+        }
+
+        /// <summary>
+        /// 重置Bunlde模式加载资源的Shader
+        /// </summary>
+        /// <param name="go"></param>
+        public static void ResetShader(GameObject go)
+        {
+            if (!AppConst.AssetBundleMode || go == null) return;
+
+            MeshRenderer[] meshes = go.transform.GetComponentsInChildren<MeshRenderer>(true);
+            foreach (MeshRenderer mesh in meshes)
+            {
+                if (mesh.sharedMaterial != null)
+                    mesh.sharedMaterial.shader = Shader.Find(mesh.sharedMaterial.shader.name);
+            }
+
+            SkinnedMeshRenderer[] skinnedMeshes = go.transform.GetComponentsInChildren<SkinnedMeshRenderer>(true);
+            foreach (var skinned in skinnedMeshes)
+            {
+                if (skinned.sharedMaterial != null)
+                    skinned.sharedMaterial.shader = Shader.Find(skinned.sharedMaterial.shader.name);
+            }
+
+            ParticleSystem[] particles = go.transform.GetComponentsInChildren<ParticleSystem>(true);
+            foreach (ParticleSystem pa in particles)
+            {
+                Renderer renderer = pa.GetComponent<Renderer>();
+                renderer.sharedMaterial.shader = Shader.Find(renderer.sharedMaterial.shader.name);
+            }
         }
     }
 }

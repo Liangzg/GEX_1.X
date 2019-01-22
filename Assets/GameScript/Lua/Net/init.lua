@@ -1,3 +1,11 @@
+--[[
+	@Author: liang07.zg@foxmail.com
+    网络模块
+]]
+
+local NET_MODE = ...
+
+
 require('Net/Proto')
 require('Net/gInterface')
 require "Net/NetClient"

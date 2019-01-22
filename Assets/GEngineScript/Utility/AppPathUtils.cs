@@ -5,6 +5,7 @@
 using UnityEngine;
 using System.Collections;
 using System.IO;
+using GEX;
 
 /// <summary>
 /// 描述：应用路径工具集
@@ -34,15 +35,24 @@ public sealed class AppPathUtils
     /// </summary>
     /// <param name="path"></param>
     /// <returns></returns>
-    public static string WWWStreamingPathFormat(string path)
+    public static string StreamingPathFormat(string path)
     {
+        using (zstring.Block())
+        {
 #if UNITY_EDITOR
-        return string.Concat("file:///" , Application.streamingAssetsPath , "/" , path);
-#elif UNITY_ANDROID 
-        return string.Concat("jar:file://" , Application.streamingAssetsPath , "/" , path);
-#elif UNITY_IPHONE
-        return string.Concat("file://" , Application.streamingAssetsPath  , "/" , path);
-#endif        
+            if (AppConst.BundleDebugMode)
+                return zstring.Format("file:///{0}", Application.dataPath + "/AssetBundle");
+            else
+                return zstring.Format("file:///{0}", Application.streamingAssetsPath);
+#elif UNITY_ANDROID
+            //return zstring.Format("jar:file://{0}!/assets/", Application.dataPath);
+            return string.Concat("jar:file://" , Application.streamingAssetsPath , "/" , path);
+#elif UNITY_IOS
+            //return zstring.Format("file://{0}/Raw/", Application.dataPath);
+            return string.Concat("file://" , Application.streamingAssetsPath  , "/" , path);
+#endif
+            return zstring.Format("file:///{0}", Application.streamingAssetsPath);
+        }
     }
 
     /// <summary>
@@ -74,7 +84,7 @@ public sealed class AppPathUtils
         string persistendPath = Path.Combine(PersistentDataRootPath, path);
         if(File.Exists(persistendPath))
             return isWWW ? WWWPathFormat(path) : persistendPath;
-        return isWWW ? WWWStreamingPathFormat(path) : string.Concat(Application.streamingAssetsPath, "/", path);
+        return isWWW ? StreamingPathFormat(path) : string.Concat(Application.streamingAssetsPath, "/", path);
     }
 
 

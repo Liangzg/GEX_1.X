@@ -8,14 +8,13 @@ ByteArrayQueue = NetCore.ByteArrayQueue
 TestProtoType = ProtocalType.BINARY;
 
 Util = LuaFramework.Util;
-AppConst = LuaFramework.AppConst;
-LuaHelper = LuaFramework.LuaHelper;
-ByteBuffer = LuaFramework.ByteBuffer;
+--AppConst = LuaFramework.AppConst
+LuaHelper = LuaFramework.LuaHelper
+--ByteBuffer = LuaFramework.ByteBuffer
 
-resMgr = LuaHelper.GetResManager ();
-panelMgr = LuaHelper.GetPanelManager ();
-soundMgr = LuaHelper.GetSoundManager ();
-networkMgr = LuaHelper.GetNetManager ();
+resMgr = LuaHelper.GetResManager()
+panelMgr = LuaHelper.GetPanelManager()
+soundMgr = LuaHelper.GetSoundManager()
+--networkMgr = LuaHelper.GetNetManager()
 
-WWW = UnityEngine.WWW;
-GameObject = UnityEngine.GameObject;
+UIManager = UIManager.Instance

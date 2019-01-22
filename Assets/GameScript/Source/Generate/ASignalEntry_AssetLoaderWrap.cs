@@ -6,7 +6,7 @@ public class ASignalEntry_AssetLoaderWrap
 {
 	public static void Register(LuaState L)
 	{
-		L.BeginClass(typeof(ASignalEntry<AssetLoader>), typeof(System.Object), "ASignalEntry_AssetLoader");
+		L.BeginClass(typeof(ASingleton<AssetLoader>), typeof(System.Object), "ASignalEntry_AssetLoader");
 		L.RegFunction("__tostring", Lua_ToString);
 		L.RegVar("Instance", get_Instance, null);
 		L.EndClass();
@@ -34,7 +34,7 @@ public class ASignalEntry_AssetLoaderWrap
 	{
 		try
 		{
-			ToLua.PushObject(L, ASignalEntry<AssetLoader>.Instance);
+			ToLua.PushObject(L, ASingleton<AssetLoader>.Instance);
 			return 1;
 		}
 		catch(Exception e)

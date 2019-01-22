@@ -7,5 +7,18 @@ ProtocalType = {
 	SPROTO = 3,
 }
 
+require "Engines.table"
+require "Engines.string"
+require "Engines.class"
 
-require "init"
+--require "AppConst"
+--require "AppMain"
+require "GameScript"
+require "UnityEngines"
+
+require "Engines.init"
+require "Common.init"
+
+require "GameState.init"
+--require "Net.init"
+require "Util.init"

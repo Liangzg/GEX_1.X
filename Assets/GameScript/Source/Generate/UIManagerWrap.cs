@@ -6,7 +6,7 @@ public class UIManagerWrap
 {
 	public static void Register(LuaState L)
 	{
-		L.BeginClass(typeof(UIManager), typeof(ASignalEntry<UIManager>));
+		L.BeginClass(typeof(UIManager), typeof(ASingleton<UIManager>));
 		L.RegFunction("Show", Show);
 		L.RegFunction("ShowPageName", ShowPageName);
 		L.RegFunction("GetPageUI", GetPageUI);

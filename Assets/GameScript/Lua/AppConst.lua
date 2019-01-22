@@ -7,7 +7,7 @@ Email :  game.liangzg@foxmail.com
 --[[
     应用配置
 ]]
-AppConst = {}
+--AppConst = {}
 
 --资源加载是否使用AssetBundle
 AppConst.IsAssetBundle = false

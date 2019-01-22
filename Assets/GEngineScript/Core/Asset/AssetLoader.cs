@@ -16,7 +16,7 @@ using UnityEditor;
 /// 描述：资源加载器，主要用于加载除场景资源外的其它资源
 /// <para>创建时间：2016-06-20</para>
 /// </summary>
-public class AssetLoader : ASignalEntry<AssetLoader>{
+public class AssetLoader : ASingleton<AssetLoader>{
     public enum EAssetType
     {
         ALL,

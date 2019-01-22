@@ -10,17 +10,25 @@ public delegate void VoidDelegate(GameObject gObj);
 #endregion
 
 public class AppConst {
-    public const bool DebugMode = false;                       //调试模式-用于内部测试
 
-    /// <summary>
-    /// 如果开启更新模式，前提必须启动框架自带服务器端。
-    /// 否则就需要自己将StreamingAssets里面的所有内容
-    /// 复制到自己的Webserver上面，并修改下面的WebUrl。
-    /// </summary>
-    public const bool UpdateMode = false;                       //更新模式-默认关闭 
-    public const bool LuaByteMode = false;                       //Lua字节码模式-默认关闭 
-    public const bool LuaBundleMode = false;                    //Lua代码AssetBundle模式
+#if UNITY_EDITOR
+    public static bool DebugMode = true;                         //调试模式-用于内部测试,影响释放
+    public static bool UpdateMode = false;                       //更新模式-默认关闭
+    public static bool AssetBundleMode = false;                  //资源AssetBundle模式
+    public static bool LuaBundleMode = false;                    //Lua代码AssetBundle模式-默认关闭
+#else
+    public static bool DebugMode = false;                        //调试模式-用于内部测试
+    public static bool UpdateMode = true;                       //更新模式-默认开启(非编辑器)
+    public static bool AssetBundleMode = true;                   //资源AssetBundle模式
+    public static bool LuaBundleMode = true;                     //Lua代码AssetBundle模式-不是编辑器模式下默认打开
+#endif
 
+    public static bool BundleDebugMode = false;
+
+    public static bool alwaysExtractData = false;
+
+    public static bool LuaByteMode = false;                       //Lua字节码模式-默认关闭
+    
     public const int TimerInterval = 1;
     public const int GameFrameRate = 30;                        //游戏帧频
 
