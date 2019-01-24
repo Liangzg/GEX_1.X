@@ -6,6 +6,7 @@ using LuaInterface;
 using BindType = ToLuaMenu.BindType;
 using System.Reflection;
 using LuaFramework;
+using UnityEngine.UI;
 
 public static class CustomSettings
 {
@@ -142,6 +143,33 @@ public static class CustomSettings
         _GT(typeof(BlendWeights)),           
         _GT(typeof(RenderTexture)),
         _GT(typeof(UnityEngine.SceneManagement.SceneManager)),
+
+        //UGUI
+        //_GT(typeof(Graphic)),//.AddExtendType(typeof(DG.Tweening.ShortcutExtensions46)),
+        //_GT(typeof(RectTransform)),//.AddExtendType(typeof(DG.Tweening.ShortcutExtensions46)),
+        //_GT(typeof(Text)),//.AddExtendType(typeof(DG.Tweening.ShortcutExtensions46)),
+        _GT(typeof(Image)),//.AddExtendType(typeof(DG.Tweening.ShortcutExtensions46)),
+        _GT(typeof(LayoutElement)),//.AddExtendType(typeof(DG.Tweening.ShortcutExtensions46)),
+        _GT(typeof(Sprite)),//.AddExtendType(typeof(DG.Tweening.ShortcutExtensions46)),
+        _GT(typeof(Dropdown)),
+        _GT(typeof(InputField)),
+        _GT(typeof(Button)),
+        _GT(typeof(VerticalLayoutGroup)),
+        _GT(typeof(HorizontalLayoutGroup)),
+        _GT(typeof(Button.ButtonClickedEvent)),
+        _GT(typeof(RawImage)),
+        _GT(typeof(Toggle)),
+        _GT(typeof(ToggleGroup)),
+        _GT(typeof(Slider)),//.AddExtendType(typeof(DG.Tweening.ShortcutExtensions46)),
+        _GT(typeof(Scrollbar)),
+        _GT(typeof(ScrollRect)),//.AddExtendType(typeof(DG.Tweening.ShortcutExtensions46)),
+        _GT(typeof(Mask)),
+        _GT(typeof(Canvas)),
+        _GT(typeof(CanvasGroup)),//.AddExtendType(typeof(DG.Tweening.ShortcutExtensions46)),
+        _GT(typeof(UnityEngine.RenderMode)),
+
+        //UI
+        _GT(typeof(LuaPageBehaviour)),
 
         //游戏功能代码 
         _GT(typeof(AppConst)),

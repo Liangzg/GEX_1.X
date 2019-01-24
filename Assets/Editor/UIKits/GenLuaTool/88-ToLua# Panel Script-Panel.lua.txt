@@ -1,0 +1,56 @@
+-- @Author:
+-- @Last Modified time: 2017-01-01 00:00:00
+-- @Desc:
+
+#SCRIPTNAME# = {}
+local this = #SCRIPTNAME#
+local curUiId = 0
+
+--- 由LuaBehaviour自动调用
+function #SCRIPTNAME#.Awake(basePage)
+	this.basePage = basePage
+
+	this.widgets = {
+#WIDGETS#
+	}
+	LuaUIHelper.bind(this.gameObject , #SCRIPTNAME# )
+end
+
+function #SCRIPTNAME#.Show( func )
+    UIManager.Show("#CREATEPATH#", nil)
+	this.closeFunc = func
+end
+
+--- 由LuaBehaviour自动调用
+function #SCRIPTNAME#.OnInit()
+    --每次显示自动修改UI中所有Panel的depth
+    --LuaUIHelper.addUIDepth(this.gameObject , #SCRIPTNAME#)
+	this._registeEvents(this.event)
+
+end
+
+-- 注册界面事件监听
+function #SCRIPTNAME#._registeEvents(event)
+    
+end
+
+--- 关闭界面
+function #SCRIPTNAME#._onClickClose( )
+    --panelMgr:ClosePanel("#CLOSEPATH#")
+	if this.closeFunc ~= nil then
+		this.closeFunc()
+		this.closeFunc = nil
+	end
+end
+
+--- 由LuaBehaviour自动调用
+function #SCRIPTNAME#.OnClose()
+    --LuaUIHelper.removeUIDepth(this.gameObject)  --还原全局深度
+end
+
+--- 由LuaBehaviour自动调用--
+function #SCRIPTNAME#.OnDestroy()
+	this.gameObject = nil
+	this.transform = nil
+	this.widgets = nil
+end

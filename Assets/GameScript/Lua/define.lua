@@ -21,6 +21,7 @@ require "Common.init"
 require "3rd.init"
 
 require "GameState.init"
+require "UI.init"
 --require "Net.init"
 require "Util.init"
 

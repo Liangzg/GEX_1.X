@@ -25,6 +25,8 @@ public static class DelegateFactory
 		dict.Add(typeof(UnityEngine.Application.AdvertisingIdentifierCallback), UnityEngine_Application_AdvertisingIdentifierCallback);
 		dict.Add(typeof(UnityEngine.AudioClip.PCMReaderCallback), UnityEngine_AudioClip_PCMReaderCallback);
 		dict.Add(typeof(UnityEngine.AudioClip.PCMSetPositionCallback), UnityEngine_AudioClip_PCMSetPositionCallback);
+		dict.Add(typeof(UnityEngine.UI.InputField.OnValidateInput), UnityEngine_UI_InputField_OnValidateInput);
+		dict.Add(typeof(UnityEngine.Canvas.WillRenderCanvases), UnityEngine_Canvas_WillRenderCanvases);
 		dict.Add(typeof(NetCore.Net.NetError), NetCore_Net_NetError);
 		dict.Add(typeof(System.Action<byte[]>), System_Action_bytes);
 		dict.Add(typeof(System.Action<float,float>), System_Action_float_float);
@@ -263,6 +265,57 @@ public static class DelegateFactory
 		}
 
 		UnityEngine.AudioClip.PCMSetPositionCallback d = (new UnityEngine_AudioClip_PCMSetPositionCallback_Event(func)).Call;
+		return d;
+	}
+
+	class UnityEngine_UI_InputField_OnValidateInput_Event : LuaDelegate
+	{
+		public UnityEngine_UI_InputField_OnValidateInput_Event(LuaFunction func) : base(func) { }
+
+		public char Call(string param0,int param1,char param2)
+		{
+			func.BeginPCall();
+			func.Push(param0);
+			func.Push(param1);
+			func.Push(param2);
+			func.PCall();
+			char ret = (char)func.CheckNumber();
+			func.EndPCall();
+			return ret;
+		}
+	}
+
+	public static Delegate UnityEngine_UI_InputField_OnValidateInput(LuaFunction func)
+	{
+		if (func == null)
+		{
+			UnityEngine.UI.InputField.OnValidateInput fn = delegate { return '\0'; };
+			return fn;
+		}
+
+		UnityEngine.UI.InputField.OnValidateInput d = (new UnityEngine_UI_InputField_OnValidateInput_Event(func)).Call;
+		return d;
+	}
+
+	class UnityEngine_Canvas_WillRenderCanvases_Event : LuaDelegate
+	{
+		public UnityEngine_Canvas_WillRenderCanvases_Event(LuaFunction func) : base(func) { }
+
+		public void Call()
+		{
+			func.Call();
+		}
+	}
+
+	public static Delegate UnityEngine_Canvas_WillRenderCanvases(LuaFunction func)
+	{
+		if (func == null)
+		{
+			UnityEngine.Canvas.WillRenderCanvases fn = delegate { };
+			return fn;
+		}
+
+		UnityEngine.Canvas.WillRenderCanvases d = (new UnityEngine_Canvas_WillRenderCanvases_Event(func)).Call;
 		return d;
 	}
 

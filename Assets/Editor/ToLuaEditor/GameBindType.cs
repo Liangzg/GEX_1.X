@@ -39,9 +39,8 @@ public sealed class GameBindType
     {
         _GT<AssetLoader>(),
         _GT<LuaAssetLoader>(),
-
-        _GT<LuaUIPage>(),
-        _GT<ABaseUIPage>(),
+        
+        _GT<UIPage>(),
         _GT<EPageType>(),
         _GT<EShowMode>(),
         _GT<ECollider>(),

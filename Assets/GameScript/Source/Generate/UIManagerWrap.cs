@@ -8,7 +8,6 @@ public class UIManagerWrap
 	{
 		L.BeginClass(typeof(UIManager), typeof(ASingleton<UIManager>));
 		L.RegFunction("Show", Show);
-		L.RegFunction("ShowPageName", ShowPageName);
 		L.RegFunction("GetPageUI", GetPageUI);
 		L.RegFunction("Hide", Hide);
 		L.RegFunction("AutoBackPage", AutoBackPage);
@@ -37,24 +36,6 @@ public class UIManagerWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int ShowPageName(IntPtr L)
-	{
-		try
-		{
-			ToLua.CheckArgsCount(L, 3);
-			UIManager obj = (UIManager)ToLua.CheckObject(L, 1, typeof(UIManager));
-			string arg0 = ToLua.CheckString(L, 2);
-			object arg1 = ToLua.ToVarObject(L, 3);
-			obj.ShowPageName(arg0, arg1);
-			return 0;
-		}
-		catch(Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetPageUI(IntPtr L)
 	{
 		try
@@ -62,7 +43,7 @@ public class UIManagerWrap
 			ToLua.CheckArgsCount(L, 2);
 			UIManager obj = (UIManager)ToLua.CheckObject(L, 1, typeof(UIManager));
 			string arg0 = ToLua.CheckString(L, 2);
-			ABaseUIPage o = obj.GetPageUI(arg0);
+			UIPage o = obj.GetPageUI(arg0);
 			ToLua.PushObject(L, o);
 			return 1;
 		}

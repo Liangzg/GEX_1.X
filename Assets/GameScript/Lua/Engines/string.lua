@@ -17,10 +17,10 @@ print(string.htmlspecialchars("<ABC>"))
 @return string 转换结果
 ]]
 function string.htmlspecialchars(input)
-    for k, v in pairs(string._htmlspecialchars_set) do
-        input = string.gsub(input, k, v)
-    end
-    return input
+	for k, v in pairs(string._htmlspecialchars_set) do
+		input = string.gsub(input, k, v)
+	end
+	return input
 end
 
 --[[--
@@ -33,10 +33,10 @@ print(string.restorehtmlspecialchars("&lt;ABC&gt;"))
 @return string 转换结果
 ]]
 function string.restorehtmlspecialchars(input)
-    for k, v in pairs(string._htmlspecialchars_set) do
-        input = string.gsub(input, v, k)
-    end
-    return input
+	for k, v in pairs(string._htmlspecialchars_set) do
+		input = string.gsub(input, v, k)
+	end
+	return input
 end
 
 --[[--
@@ -50,7 +50,7 @@ print(string.nl2br("Hello\nWorld"))
 @return string 转换结果
 ]]
 function string.nl2br(input)
-    return string.gsub(input, "\n", "<br />")
+	return string.gsub(input, "\n", "<br />")
 end
 
 --[[--
@@ -64,11 +64,11 @@ print(string.nl2br("<Hello>\nWorld"))
 @return string 转换结果
 ]]
 function string.text2html(input)
-    input = string.gsub(input, "\t", "    ")
-    input = string.htmlspecialchars(input)
-    input = string.gsub(input, " ", "&nbsp;")
-    input = string.nl2br(input)
-    return input
+	input = string.gsub(input, "\t", "    ")
+	input = string.htmlspecialchars(input)
+	input = string.gsub(input, " ", "&nbsp;")
+	input = string.nl2br(input)
+	return input
 end
 
 --[[--
@@ -83,20 +83,20 @@ local res = string.split(input, "-+-")
 ~~~
 @param string input 输入字符串
 @param string delimiter 分割标记字符或字符串
-@return array 包含分割结果的数组
+@return array 包含分割结果的数组,起始下标index从1开始
 ]]
 function string.split(input, delimiter)
-    input = tostring(input)
-    delimiter = tostring(delimiter)
-    if (delimiter=='') then return false end
-    local pos,arr = 0, {}
-    -- for each divider found
-    for st,sp in function() return string.find(input, delimiter, pos, true) end do
-        table.insert(arr, string.sub(input, pos, st - 1))
-        pos = sp + 1
-    end
-    table.insert(arr, string.sub(input, pos))
-    return arr
+	input = tostring(input)
+	delimiter = tostring(delimiter)
+	if (delimiter=='') then return false end
+	local pos,arr = 0, {}
+	-- for each divider found
+	for st,sp in function() return string.find(input, delimiter, pos, true) end do
+		table.insert(arr, string.sub(input, pos, st - 1))
+		pos = sp + 1
+	end
+	table.insert(arr, string.sub(input, pos))
+	return arr
 end
 
 --[[--
@@ -116,7 +116,7 @@ print(string.ltrim(input))
 @see string.rtrim, string.trim
 ]]
 function string.ltrim(input)
-    return string.gsub(input, "^[ \t\n\r]+", "")
+	return string.gsub(input, "^[ \t\n\r]+", "")
 end
 
 --[[--
@@ -131,7 +131,7 @@ print(string.ltrim(input))
 @see string.ltrim, string.trim
 ]]
 function string.rtrim(input)
-    return string.gsub(input, "[ \t\n\r]+$", "")
+	return string.gsub(input, "[ \t\n\r]+$", "")
 end
 
 --[[--
@@ -141,8 +141,8 @@ end
 @see string.ltrim, string.rtrim
 ]]
 function string.trim(input)
-    input = string.gsub(input, "^[ \t\n\r]+", "")
-    return string.gsub(input, "[ \t\n\r]+$", "")
+	input = string.gsub(input, "^[ \t\n\r]+", "")
+	return string.gsub(input, "[ \t\n\r]+$", "")
 end
 
 --[[--
@@ -156,11 +156,11 @@ print(string.ucfirst(input))
 @return string 结果
 ]]
 function string.ucfirst(input)
-    return string.upper(string.sub(input, 1, 1)) .. string.sub(input, 2)
+	return string.upper(string.sub(input, 1, 1)) .. string.sub(input, 2)
 end
 
 local function urlencodechar(char)
-    return "%" .. string.format("%02X", string.byte(char))
+	return "%" .. string.format("%02X", string.byte(char))
 end
 
 --[[--
@@ -176,12 +176,12 @@ print(string.urlencode(input))
 @see string.urldecode
 ]]
 function string.urlencode(input)
-    -- convert line endings
-    input = string.gsub(tostring(input), "\n", "\r\n")
-    -- escape all characters but alphanumeric, '.' and '-'
-    input = string.gsub(input, "([^%w%.%- ])", urlencodechar)
-    -- convert spaces to "+" symbols
-    return string.gsub(input, " ", "+")
+	-- convert line endings
+	input = string.gsub(tostring(input), "\n", "\r\n")
+	-- escape all characters but alphanumeric, '.' and '-'
+	input = string.gsub(input, "([^%w%.%- ])", urlencodechar)
+	-- convert spaces to "+" symbols
+	return string.gsub(input, " ", "+")
 end
 
 --[[--
@@ -197,10 +197,10 @@ print(string.urldecode(input))
 @see string.urlencode
 ]]
 function string.urldecode(input)
-    input = string.gsub (input, "+", " ")
-    input = string.gsub (input, "%%(%x%x)", function(h) return string.char(checknumber(h,16)) end)
-    input = string.gsub (input, "\r\n", "\n")
-    return input
+	input = string.gsub (input, "+", " ")
+	input = string.gsub (input, "%%(%x%x)", function(h) return string.char(checknumber(h,16)) end)
+	input = string.gsub (input, "\r\n", "\n")
+	return input
 end
 
 --[[--
@@ -214,23 +214,23 @@ print(string.utf8len(input))
 @return integer 长度
 ]]
 function string.utf8len(input)
-    local len  = string.len(input)
-    local left = len
-    local cnt  = 0
-    local arr  = {0, 0xc0, 0xe0, 0xf0, 0xf8, 0xfc}
-    while left ~= 0 do
-        local tmp = string.byte(input, -left)
-        local i   = #arr
-        while arr[i] do
-            if tmp >= arr[i] then
-                left = left - i
-                break
-            end
-            i = i - 1
-        end
-        cnt = cnt + 1
-    end
-    return cnt
+	local len  = string.len(input)
+	local left = len
+	local cnt  = 0
+	local arr  = {0, 0xc0, 0xe0, 0xf0, 0xf8, 0xfc}
+	while left ~= 0 do
+		local tmp = string.byte(input, -left)
+		local i   = #arr
+		while arr[i] do
+			if tmp >= arr[i] then
+				left = left - i
+				break
+			end
+			i = i - 1
+		end
+		cnt = cnt + 1
+	end
+	return cnt
 end
 
 --[[--
@@ -243,11 +243,98 @@ print(string.formatnumberthousands(1924235))
 @return string 格式化结果
 ]]
 function string.formatnumberthousands(num)
-    local formatted = tostring(checknumber(num))
-    local k
-    while true do
-        formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1,%2')
-        if k == 0 then break end
-    end
-    return formatted
+	local formatted = tostring(checknumber(num))
+	local k
+	while true do
+		formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1,%2')
+		if k == 0 then break end
+	end
+	return formatted
+end
+
+
+--返回当前字符实际占用的字符数
+function string.subStringGetByteCount(str , index)
+	local curByte = string.byte(str , index)
+	local byteCount = 1
+	if curByte == nil then
+		byteCount = 0
+	elseif curByte > 0 and curByte <= 127 then
+		byteCount = 1
+	elseif curByte >= 192 and curByte <= 223 then
+		byteCount = 2
+	elseif curByte >= 224 and curByte <= 239 then
+		byteCount = 3
+	elseif curByte >= 240 and curByte <= 247 then
+		byteCount = 4
+	end
+	return byteCount
+end
+
+--获取中英混合UTF8 字符串的真实符数量
+function string.subStringGetTotalIndex(str)
+	local curIndex = 0
+	local i = 1
+	local lastCount = 1
+	repeat
+		lastCount = string.subStringGetByteCount(str , i)
+		i = i + lastCount
+		curIndex = curIndex + 1
+	until(lastCount == 0)
+	return curIndex - 1
+end
+
+--获取中英混合UTF8 字符串的真实符数量
+function string.subStringGetTrueIndex(str , index)
+	local curIndex = 0
+	local i = 1
+	local lastCount = 1
+	repeat
+		lastCount = string.subStringGetByteCount(str , i)
+		i = i + lastCount
+		curIndex = curIndex + 1
+	until(curIndex >= index)
+	return i - lastCount
+end
+
+
+--[[
+字符串截取 索引从1开始截取
+print(string.subString('字符串123截取') , 4)
+--输出 123截取
+print(string.subString('字符串123截取') , 4 , 7)
+--输出 123截
+@str  字符串
+@startIndex  开始截取索引
+@endIndex   结束索引 （可有可无）
+]]
+function string.subString(str , startIndex , endIndex)
+	if startIndex < 0 then
+		startIndex = string.subStringGetTotalIndex(str) + startIndex + 1
+	end
+
+	if endIndex ~= nil and endIndex < 0 then
+		endIndex = string.subStringGetTotalIndex(str) + endIndex + 1
+	end
+
+	if endIndex == nil then
+		return string.sub(str , string.subStringGetTrueIndex(str , startIndex))
+	else
+		return string.sub(str , string.subStringGetTrueIndex(str , startIndex) , string.subStringGetTrueIndex(str , endIndex + 1) -1)
+	end
+end
+
+--[[
+字符串是否为空
+]]
+function string.isEmptyOrNil(str)
+	if str then
+		str = string.trim(str)
+		return string.len(str) <= 0
+	end
+	return true
+end
+
+function string.setColor(str,color)
+	return string.format("<color=%s>%s</color>",color,str)
 end

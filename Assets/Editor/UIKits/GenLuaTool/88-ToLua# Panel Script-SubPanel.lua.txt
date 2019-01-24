@@ -1,0 +1,36 @@
+-- @Author:
+-- @Last Modified time: 2017-01-01 00:00:00
+-- @Desc
+
+local #SCRIPTNAME# = class("#SCRIPTNAME#")
+
+
+function #SCRIPTNAME#:Awake(go)
+    self.gameObject = go
+    self.transform = go.transform
+    self.widgets = {
+#WIDGETS#
+    }
+    LuaUIHelper.bind(self.gameObject , self)
+end
+
+
+function #SCRIPTNAME#:Copy(parentGO)
+    local newGo = newObject(self.gameObject)
+	newGo.transform:SetParent(parentGO.transform)
+    --Util.SetParent(newGo , parentGO)
+	newGo.transform.localScale = Vector3.one
+    newGo.transform.anchoredPosition3D = Vector3.zero
+
+    local copy = self.new()
+    copy:Awake(newGo)
+    return copy
+end
+
+function #SCRIPTNAME#:OnDestroy()
+    self.gameObject = nil
+    self.transform = nil
+    self.widgets = nil
+end
+
+return #SCRIPTNAME#
