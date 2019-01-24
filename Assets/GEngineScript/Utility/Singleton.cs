@@ -117,8 +117,10 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     /// </summary>
     protected virtual void OnDestroy()
     {
+        _instance = null;
         applicationIsQuitting = true;
     }
+
 }
 
 

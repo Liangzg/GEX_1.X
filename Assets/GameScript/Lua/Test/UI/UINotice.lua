@@ -1,9 +1,6 @@
 --[[
 	Author： LiangZG
 	Email :  game.liangzg@foxmail.com
-]]
-
---[[
 	Desc:普通通知面板
 ]]
 

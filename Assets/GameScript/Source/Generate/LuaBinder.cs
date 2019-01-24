@@ -19,8 +19,8 @@ public static class LuaBinder
 		EShowModeWrap.Register(L);
 		EColliderWrap.Register(L);
 		UIManagerWrap.Register(L);
-		ASignalEntry_AssetLoaderWrap.Register(L);
-		ASignalEntry_UIManagerWrap.Register(L);
+		ASingleton_AssetLoaderWrap.Register(L);
+		ASingleton_UIManagerWrap.Register(L);
 		L.BeginModule("UnityEngine");
 		UnityEngine_ComponentWrap.Register(L);
 		UnityEngine_TransformWrap.Register(L);

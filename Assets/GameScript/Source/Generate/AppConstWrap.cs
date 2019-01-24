@@ -9,10 +9,6 @@ public class AppConstWrap
 		L.BeginClass(typeof(AppConst), typeof(System.Object));
 		L.RegFunction("New", _CreateAppConst);
 		L.RegFunction("__tostring", Lua_ToString);
-		L.RegConstant("DebugMode", 0);
-		L.RegConstant("UpdateMode", 0);
-		L.RegConstant("LuaByteMode", 0);
-		L.RegConstant("LuaBundleMode", 0);
 		L.RegConstant("TimerInterval", 1);
 		L.RegConstant("GameFrameRate", 30);
 		L.RegVar("AppName", get_AppName, null);
@@ -21,6 +17,13 @@ public class AppConstWrap
 		L.RegVar("ExtName", get_ExtName, null);
 		L.RegVar("AssetDir", get_AssetDir, null);
 		L.RegVar("WebUrl", get_WebUrl, null);
+		L.RegVar("DebugMode", get_DebugMode, set_DebugMode);
+		L.RegVar("UpdateMode", get_UpdateMode, set_UpdateMode);
+		L.RegVar("AssetBundleMode", get_AssetBundleMode, set_AssetBundleMode);
+		L.RegVar("LuaBundleMode", get_LuaBundleMode, set_LuaBundleMode);
+		L.RegVar("BundleDebugMode", get_BundleDebugMode, set_BundleDebugMode);
+		L.RegVar("alwaysExtractData", get_alwaysExtractData, set_alwaysExtractData);
+		L.RegVar("LuaByteMode", get_LuaByteMode, set_LuaByteMode);
 		L.RegVar("UserId", get_UserId, set_UserId);
 		L.RegVar("SocketPort", get_SocketPort, set_SocketPort);
 		L.RegVar("SocketAddress", get_SocketAddress, set_SocketAddress);
@@ -154,6 +157,104 @@ public class AppConstWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_DebugMode(IntPtr L)
+	{
+		try
+		{
+			LuaDLL.lua_pushboolean(L, AppConst.DebugMode);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_UpdateMode(IntPtr L)
+	{
+		try
+		{
+			LuaDLL.lua_pushboolean(L, AppConst.UpdateMode);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_AssetBundleMode(IntPtr L)
+	{
+		try
+		{
+			LuaDLL.lua_pushboolean(L, AppConst.AssetBundleMode);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_LuaBundleMode(IntPtr L)
+	{
+		try
+		{
+			LuaDLL.lua_pushboolean(L, AppConst.LuaBundleMode);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_BundleDebugMode(IntPtr L)
+	{
+		try
+		{
+			LuaDLL.lua_pushboolean(L, AppConst.BundleDebugMode);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_alwaysExtractData(IntPtr L)
+	{
+		try
+		{
+			LuaDLL.lua_pushboolean(L, AppConst.alwaysExtractData);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_LuaByteMode(IntPtr L)
+	{
+		try
+		{
+			LuaDLL.lua_pushboolean(L, AppConst.LuaByteMode);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int get_UserId(IntPtr L)
 	{
 		try
@@ -202,6 +303,111 @@ public class AppConstWrap
 		{
 			LuaDLL.lua_pushstring(L, AppConst.FrameworkRoot);
 			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_DebugMode(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			AppConst.DebugMode = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_UpdateMode(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			AppConst.UpdateMode = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_AssetBundleMode(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			AppConst.AssetBundleMode = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_LuaBundleMode(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			AppConst.LuaBundleMode = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_BundleDebugMode(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			AppConst.BundleDebugMode = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_alwaysExtractData(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			AppConst.alwaysExtractData = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_LuaByteMode(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			AppConst.LuaByteMode = arg0;
+			return 0;
 		}
 		catch(Exception e)
 		{

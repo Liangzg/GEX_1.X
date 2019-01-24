@@ -1,9 +1,6 @@
 --[[
 	Author： LiangZG
 	Email :  game.liangzg@foxmail.com
-]]
-
---[[
 	Desc:顶部工具栏
 ]]
 
@@ -15,7 +12,7 @@ local this = TopToolbar
 	GameObject  gObj   依附的GameObject结点  
 ]]
 function TopToolbar.OnAwake(basePage)
-    basePage:SetPage(EPageType.Fixed , EShowMode.None , ECollider.None)
+    basePage:SetFixPage(2500 , EShowMode.None , ECollider.None)
     --以下这种方式，可行
     this.backBtn = this.transform:FindChild("BtnBack").gameObject
 

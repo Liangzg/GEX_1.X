@@ -1107,45 +1107,4 @@ static public class NGUIMath
 		return relativeTo.InverseTransformPoint(worldPos);
 	}
 
-	/// <summary>
-	/// Helper function that can set the transform's position to be at the specified world position.
-	/// Ideal usage: positioning a UI element to be directly over a 3D point in space.
-	/// </summary>
-	/// <param name="worldPos">World position, visible by the worldCam</param>
-	/// <param name="worldCam">Camera that is able to see the worldPos</param>
-	/// <param name="myCam">Camera that is able to see the transform this function is called on</param>
-
-	static public void OverlayPosition (this Transform trans, Vector3 worldPos, Camera worldCam, Camera myCam)
-	{
-		worldPos = worldCam.WorldToViewportPoint(worldPos);
-		worldPos = myCam.ViewportToWorldPoint(worldPos);
-		Transform parent = trans.parent;
-		trans.localPosition = (parent != null) ? parent.InverseTransformPoint(worldPos) : worldPos;
-	}
-
-	/// <summary>
-	/// Helper function that can set the transform's position to be at the specified world position.
-	/// Ideal usage: positioning a UI element to be directly over a 3D point in space.
-	/// </summary>
-	/// <param name="worldPos">World position, visible by the worldCam</param>
-	/// <param name="worldCam">Camera that is able to see the worldPos</param>
-
-	static public void OverlayPosition (this Transform trans, Vector3 worldPos, Camera worldCam)
-	{
-		Camera myCam = NGUITools.FindCameraForLayer(trans.gameObject.layer);
-		if (myCam != null) trans.OverlayPosition(worldPos, worldCam, myCam);
-	}
-
-	/// <summary>
-	/// Helper function that can set the transform's position to be over the specified target transform.
-	/// Ideal usage: positioning a UI element to be directly over a 3D object in space.
-	/// </summary>
-	/// <param name="target">Target over which the transform should be positioned</param>
-
-	static public void OverlayPosition (this Transform trans, Transform target)
-	{
-		Camera myCam = NGUITools.FindCameraForLayer(trans.gameObject.layer);
-		Camera worldCam = NGUITools.FindCameraForLayer(target.gameObject.layer);
-		if (myCam != null && worldCam != null) trans.OverlayPosition(target.position, worldCam, myCam);
-	}
 }

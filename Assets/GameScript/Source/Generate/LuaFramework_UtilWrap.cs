@@ -28,6 +28,7 @@ public class LuaFramework_UtilWrap
 		L.RegFunction("CheckRuntimeFile", CheckRuntimeFile);
 		L.RegFunction("CallMethod", CallMethod);
 		L.RegFunction("CheckEnvironment", CheckEnvironment);
+		L.RegFunction("ResetShader", ResetShader);
 		L.RegFunction("New", _CreateLuaFramework_Util);
 		L.RegFunction("__tostring", Lua_ToString);
 		L.RegVar("DataPath", get_DataPath, null);
@@ -452,6 +453,22 @@ public class LuaFramework_UtilWrap
 			bool o = LuaFramework.Util.CheckEnvironment();
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int ResetShader(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckUnityObject(L, 1, typeof(UnityEngine.GameObject));
+			LuaFramework.Util.ResetShader(arg0);
+			return 0;
 		}
 		catch(Exception e)
 		{

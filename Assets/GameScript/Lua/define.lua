@@ -18,7 +18,12 @@ require "UnityEngines"
 
 require "Engines.init"
 require "Common.init"
+require "3rd.init"
 
 require "GameState.init"
 --require "Net.init"
 require "Util.init"
+
+
+--test
+require "Test.init"

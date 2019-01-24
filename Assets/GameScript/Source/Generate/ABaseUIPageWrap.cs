@@ -12,6 +12,7 @@ public class ABaseUIPageWrap
 		L.RegFunction("OnHide", OnHide);
 		L.RegFunction("OnDestroy", OnDestroy);
 		L.RegFunction("SetPage", SetPage);
+		L.RegFunction("SetFixPage", SetFixPage);
 		L.RegFunction("__tostring", Lua_ToString);
 		L.RegVar("BackQueue", get_BackQueue, set_BackQueue);
 		L.RegVar("CacheGameObject", get_CacheGameObject, null);
@@ -108,6 +109,25 @@ public class ABaseUIPageWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int SetFixPage(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 4);
+			ABaseUIPage obj = (ABaseUIPage)ToLua.CheckObject(L, 1, typeof(ABaseUIPage));
+			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+			EShowMode arg1 = (EShowMode)ToLua.CheckObject(L, 3, typeof(EShowMode));
+			ECollider arg2 = (ECollider)ToLua.CheckObject(L, 4, typeof(ECollider));
+			obj.SetFixPage(arg0, arg1, arg2);
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Lua_ToString(IntPtr L)
 	{
 		object obj = ToLua.ToObject(L, 1);
@@ -190,7 +210,7 @@ public class ABaseUIPageWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			ABaseUIPage obj = (ABaseUIPage)o;
-			PageAttribute ret = obj.AttributePage;
+			PageContext ret = obj.AttributePage;
 			ToLua.PushObject(L, ret);
 			return 1;
 		}

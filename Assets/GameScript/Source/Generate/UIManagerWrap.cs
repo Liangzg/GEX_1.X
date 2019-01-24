@@ -12,7 +12,9 @@ public class UIManagerWrap
 		L.RegFunction("GetPageUI", GetPageUI);
 		L.RegFunction("Hide", Hide);
 		L.RegFunction("AutoBackPage", AutoBackPage);
+		L.RegFunction("SetStateUI", SetStateUI);
 		L.RegFunction("__tostring", Lua_ToString);
+		L.RegVar("CurStateUI", get_CurStateUI, null);
 		L.EndClass();
 	}
 
@@ -104,6 +106,23 @@ public class UIManagerWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int SetStateUI(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			UIManager obj = (UIManager)ToLua.CheckObject(L, 1, typeof(UIManager));
+			EUIState arg0 = (EUIState)ToLua.CheckObject(L, 2, typeof(EUIState));
+			obj.SetStateUI(arg0);
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Lua_ToString(IntPtr L)
 	{
 		object obj = ToLua.ToObject(L, 1);
@@ -118,6 +137,25 @@ public class UIManagerWrap
 		}
 
 		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_CurStateUI(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			UIManager obj = (UIManager)o;
+			EUIState ret = obj.CurStateUI;
+			ToLua.Push(L, ret);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index CurStateUI on a nil value" : e.Message);
+		}
 	}
 }
 

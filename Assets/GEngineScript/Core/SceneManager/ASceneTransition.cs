@@ -4,6 +4,7 @@
 *********************************************************************************/
 using System.Collections;
 using GEX.Resource;
+using GEX.SceneManager;
 using UnityEngine;
 
 namespace GOE.Scene
@@ -43,8 +44,13 @@ namespace GOE.Scene
         [HideInInspector]
         public string screenName;
 
+        protected SceneStageManager sceneStageMgr;
+
         void Start()
         {
+            sceneStageMgr = SceneStageManager.Instance;
+            Loader = sceneStageMgr.stageLoader;
+
             if (Time.timeScale <= 0f && !timeScaleIndependent)
             {
                 Debug.LogWarning("Time.timeScale is set to 0 and you have not enabled 'Time Scale Independent' at the transition prefab. " +
@@ -146,6 +152,7 @@ namespace GOE.Scene
                 yield return 0;
             }
 
+            sceneStageMgr.OnCompleted();
             SendMessage("SMAfterTransitionIn", this, SendMessageOptions.DontRequireReceiver);
             // wait another frame...
             yield return 0;
