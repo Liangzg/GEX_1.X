@@ -4,7 +4,7 @@ using LuaInterface;
 
 namespace GEX.Resource
 {
-    public abstract class ALoadOperation : IEnumerator
+    public abstract class LoadOperation : IEnumerator
     {
 
         protected float progress;
@@ -16,7 +16,7 @@ namespace GEX.Resource
         /// <summary>
         /// 加载完成时的回调
         /// </summary>
-        public Action<ALoadOperation> OnFinish;
+        public Action<LoadOperation> OnFinish;
         /// <summary>
         /// 资源路径
         /// </summary>
@@ -24,10 +24,10 @@ namespace GEX.Resource
 
         protected bool hasLoaded = false;
 
-        public ALoadOperation()
+        public LoadOperation()
         {}
 
-        public ALoadOperation(string path)
+        public LoadOperation(string path)
         {
             this.assetPath = path.ToLower();
         }
@@ -61,7 +61,7 @@ namespace GEX.Resource
             this.Finish(this);
         }
 
-        public void Finish(ALoadOperation loader)
+        public void Finish(LoadOperation loader)
         {
             progress = 1.0f;
 

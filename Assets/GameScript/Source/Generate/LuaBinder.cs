@@ -50,7 +50,6 @@ public static class LuaBinder
 		UnityEngine_AsyncOperationWrap.Register(L);
 		UnityEngine_LightTypeWrap.Register(L);
 		UnityEngine_SleepTimeoutWrap.Register(L);
-		UnityEngine_AnimatorWrap.Register(L);
 		UnityEngine_InputWrap.Register(L);
 		UnityEngine_KeyCodeWrap.Register(L);
 		UnityEngine_SkinnedMeshRendererWrap.Register(L);
@@ -107,11 +106,6 @@ public static class LuaBinder
 		UnityEngine_UI_LayoutGroupWrap.Register(L);
 		L.BeginModule("Button");
 		UnityEngine_UI_Button_ButtonClickedEventWrap.Register(L);
-		L.EndModule();
-		L.EndModule();
-		L.BeginModule("Experimental");
-		L.BeginModule("Director");
-		UnityEngine_Experimental_Director_DirectorPlayerWrap.Register(L);
 		L.EndModule();
 		L.EndModule();
 		L.BeginModule("EventSystems");

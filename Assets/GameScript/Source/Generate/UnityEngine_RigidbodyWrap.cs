@@ -1076,7 +1076,7 @@ public class UnityEngine_RigidbodyWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Rigidbody obj = (UnityEngine.Rigidbody)o;
-			int ret = obj.solverIterationCount;
+			int ret = obj.solverIterations;
 			LuaDLL.lua_pushinteger(L, ret);
 			return 1;
 		}
@@ -1495,7 +1495,7 @@ public class UnityEngine_RigidbodyWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Rigidbody obj = (UnityEngine.Rigidbody)o;
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
-			obj.solverIterationCount = arg0;
+			obj.solverIterations = arg0;
 			return 0;
 		}
 		catch(Exception e)

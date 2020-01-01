@@ -12,7 +12,7 @@ namespace GEX.Resource
         {
             public int Weight;
 
-            public ALoadOperation Loader;
+            public LoadOperation Loader;
         }
         /// <summary>
         /// 权重，占总场景资源量的比重
@@ -54,7 +54,7 @@ namespace GEX.Resource
         /// </summary>
         /// <param name="loader">加载器</param>
         /// <param name="weight">资源权重</param>
-        public void AddLoader(ALoadOperation loader , int weight)
+        public void AddLoader(LoadOperation loader , int weight)
         {
             Weight += weight;
 
@@ -76,7 +76,7 @@ namespace GEX.Resource
         /// </summary>
         /// <param name="loaders">加载器集合</param>
         /// <param name="weight">总资源权重</param>
-        public void AddRangeLoader(ALoadOperation[] loaders , int weight)
+        public void AddRangeLoader(LoadOperation[] loaders , int weight)
         {
             int childWeight = weight/loaders.Length;
             Weight += childWeight * loaders.Length;

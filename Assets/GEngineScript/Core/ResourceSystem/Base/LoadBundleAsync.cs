@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using UnityEngine;
 
 namespace GEX.Resource
@@ -6,16 +7,17 @@ namespace GEX.Resource
     /// <summary>
     /// 处理异步加载AssetBundle
     /// </summary>
-    public class LoadBundleAsync : ALoadOperation
+    public class LoadBundleAsync : LoadOperation
     {
         private bool isDone = false;
         private string extension;
         private GameObject owner;
 
         private UnityEngine.Object mainAsset;
-        public LoadBundleAsync(GameObject owner, string assetName, string extension) : base(assetName)
+
+        public LoadBundleAsync(GameObject owner, string assetName) : base(assetName)
         {
-            this.extension = extension;
+            this.extension = Path.GetExtension(extension);
             this.owner = owner;
         }
 

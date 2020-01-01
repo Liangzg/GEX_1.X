@@ -179,8 +179,8 @@ public sealed class LightMapEditor
             renderInfo.LightmapIndex = meshRenderer.lightmapIndex;
             renderInfo.LightmapOffsetScale = meshRenderer.lightmapScaleOffset;
 
-            Texture2D lightmapFar = srcLightData[meshRenderer.lightmapIndex].lightmapFar;
-            Texture2D lightmapNear = srcLightData[meshRenderer.lightmapIndex].lightmapNear;
+            Texture2D lightmapFar = srcLightData[meshRenderer.lightmapIndex].lightmapColor;
+            Texture2D lightmapNear = srcLightData[meshRenderer.lightmapIndex].lightmapDir;
 
             int sceneCacheIndex = addLightmap(scenePath, resourcePath, renderInfo.LightmapIndex, lightmapFar,
                 lightmapNear);

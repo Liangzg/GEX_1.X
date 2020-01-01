@@ -10,7 +10,7 @@ namespace GEX.Resource
     /// <summary>
     /// 场景资源加载器
     /// </summary>
-    public class LoadSceneAsync : ALoadOperation
+    public class LoadSceneAsync : LoadOperation
     {
 
         private AsyncOperation loading;

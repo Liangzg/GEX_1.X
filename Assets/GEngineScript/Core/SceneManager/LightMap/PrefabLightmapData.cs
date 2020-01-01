@@ -61,7 +61,7 @@ namespace GOE.Scene
                 existAlready = false;
                 for (int j = 0; j < settingLightMaps.Length; j++)
                 {
-                    if (lightmapFars[i] == settingLightMaps[j].lightmapFar)
+                    if (lightmapFars[i] == settingLightMaps[j].lightmapColor)
                     {
                         lightmapOffsetIndex[i] = j;
                         existAlready = true;
@@ -75,8 +75,8 @@ namespace GOE.Scene
                     lightmapOffsetIndex[i] = settingLightMaps.Length + combinedLightmaps.Count;
 
                     LightmapData newLightData = new LightmapData();
-                    newLightData.lightmapFar = lightmapFars[i];
-                    newLightData.lightmapNear = lightmapNears[i];
+                    newLightData.lightmapColor = lightmapFars[i];
+                    newLightData.lightmapDir = lightmapNears[i];
                     combinedLightmaps.Add(newLightData);
                 }
             }

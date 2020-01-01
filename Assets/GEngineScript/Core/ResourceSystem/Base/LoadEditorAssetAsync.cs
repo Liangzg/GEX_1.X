@@ -6,7 +6,7 @@ namespace GEX.Resource
     /// <summary>
     /// 加载开发期的资源
     /// </summary>
-    public class LoadEditorAssetAsync : ALoadOperation
+    public class LoadEditorAssetAsync : LoadOperation
     {
 
         private UnityEngine.Object mainAsset;

@@ -7,7 +7,7 @@ namespace GEX.Resource
     /// <summary>
     /// 加载延迟时间 
     /// </summary>
-    public class LoadDelayAsync : ALoadOperation
+    public class LoadDelayAsync : LoadOperation
     {
         private float delayTime;
 

@@ -39,9 +39,9 @@ public class UIManager : ASingleton<UIManager>
     {
         if (!cachePagePool.ContainsKey(pagePath))
         {
-            new Promise<ALoadOperation>((s, j) =>
+            new Promise<LoadOperation>((s, j) =>
             {
-                ALoadOperation loader = GResource.LoadBundleAsync(pagePath);
+                LoadOperation loader = GResource.LoadAssetAsync(pagePath);
                 loader.OnFinish += s;
                 AppInter.StartCoroutine(loader);
             }).Then((loader) =>

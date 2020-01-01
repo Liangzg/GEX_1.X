@@ -22,17 +22,15 @@ namespace GEX.Resource
         /// <summary>
         /// 异步加载Prefab
         /// </summary>
-        /// <param name="assetName">无后缀的资源路径</param>
+        /// <param name="assetPath">资源的项目相对路径</param>
         /// <returns></returns>
-        public static ALoadOperation LoadBundleAsync(string assetName, string extension = ".prefab")
+        public static LoadOperation LoadAssetAsync(string assetPath)
         {
-            if (extension != ".prefab")
-                Debug.LogError("no prefab load must pass GameObject value!");
             if (AppConst.AssetBundleMode)
             {
-                return new LoadBundleAsync(null, assetName, extension);
+                return new LoadBundleAsync(null, assetPath);
             }
-            string assetPath = string.Concat(RuntimeAssetsRoot, assetName, extension);
+            assetPath = string.Concat(RuntimeAssetsRoot, assetPath);
 
             return new LoadEditorAssetAsync(assetPath);
         }
@@ -40,16 +38,16 @@ namespace GEX.Resource
         /// <summary>
         /// 异步加载Prefab
         /// </summary>
-        /// <param name="owner">资源关联的场景gameobject（prefab类型资源可传空，其他类型资源必须有值）</param>
-        /// <param name="assetName">无后缀的资源路径</param>
+        /// <param name="owner">资源关联的场景gameobject</param>
+        /// <param name="assetPath">资源的路径</param>
         /// <returns></returns>
-        public static ALoadOperation LoadBundleAsync(GameObject owner, string assetName, string extension)
+        public static LoadOperation LoadAssetAsync(GameObject owner, string assetPath)
         {
             if (AppConst.AssetBundleMode)
             {
-                return new LoadBundleAsync(owner, assetName, extension);
+                return new LoadBundleAsync(owner, assetPath);
             }
-            string assetPath = string.Concat(RuntimeAssetsRoot, assetName, extension);
+            assetPath = string.Concat(RuntimeAssetsRoot, assetPath);
 
             return new LoadEditorAssetAsync(assetPath);
         }
@@ -63,7 +61,7 @@ namespace GEX.Resource
         /// <param name="owner">资源关联的场景gameobject（prefab类型资源可传空，其他类型资源必须有值）</param>
         /// <param name="extension">文件后缀</param>
         /// <returns></returns>
-//        public static ALoadOperation LoadCacheBundleAsync(CachePoolAsync cachePool, string assetName, string extension = ".prefab")
+//        public static LoadOperation LoadCacheBundleAsync(CachePoolAsync cachePool, string assetName, string extension = ".prefab")
 //        {
 //            string prefabName = assetName;
 //            string[] tempArr = assetName.Split('/');
@@ -87,7 +85,7 @@ namespace GEX.Resource
         /// <param name="assetName">无后缀的资源路径</param>
         /// <param name="extension">文件后缀</param>
         /// <returns></returns>
-//        public static ALoadOperation LoadCacheBundleAsync(CachePoolAsync cachePool, GameObject owner, string assetName, string extension = ".prefab")
+//        public static LoadOperation LoadCacheBundleAsync(CachePoolAsync cachePool, GameObject owner, string assetName, string extension = ".prefab")
 //        {
 //            string prefabName = assetName;
 //            string[] tempArr = assetName.Split('/');

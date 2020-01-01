@@ -523,7 +523,7 @@ public class UnityEngine_ApplicationWrap
 	{
 		try
 		{
-			LuaDLL.lua_pushstring(L, UnityEngine.Application.bundleIdentifier);
+			LuaDLL.lua_pushstring(L, UnityEngine.Application.identifier);
 			return 1;
 		}
 		catch(Exception e)

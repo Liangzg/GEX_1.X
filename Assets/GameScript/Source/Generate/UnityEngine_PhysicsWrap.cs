@@ -1870,7 +1870,7 @@ public class UnityEngine_PhysicsWrap
 	{
 		try
 		{
-			LuaDLL.lua_pushinteger(L, UnityEngine.Physics.solverIterationCount);
+			LuaDLL.lua_pushinteger(L, UnityEngine.Physics.defaultSolverIterations);
 			return 1;
 		}
 		catch(Exception e)
@@ -1958,7 +1958,7 @@ public class UnityEngine_PhysicsWrap
 		try
 		{
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
-			UnityEngine.Physics.solverIterationCount = arg0;
+			UnityEngine.Physics.defaultSolverIterations = arg0;
 			return 0;
 		}
 		catch(Exception e)

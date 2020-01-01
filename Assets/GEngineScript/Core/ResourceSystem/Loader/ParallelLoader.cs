@@ -20,14 +20,14 @@ namespace GEX.Resource
     ///         yield return null;
     ///     }
     /// </summary>
-    public class ParallelLoader : ALoadOperation
+    public class ParallelLoader : LoadOperation
     {
         
         private class AsyncLoader
         {
             public int Weight;
 
-            public ALoadOperation Loader;
+            public LoadOperation Loader;
         }
         /// <summary>
         /// 权重，占总场景资源量的比重
@@ -56,7 +56,7 @@ namespace GEX.Resource
         /// </summary>
         /// <param name="loader">异步加载器</param>
         /// <param name="weight">权重，用于计算进度</param>
-        public void AddLoader(ALoadOperation loader, int weight)
+        public LoadOperation AddLoader(LoadOperation loader, int weight = 1)
         {
             Weight += weight;
 
@@ -65,6 +65,8 @@ namespace GEX.Resource
             asyncLoader.Loader = loader;
 
             this.loaders.Add(asyncLoader);
+
+            return loader;
         }
 
         /// <summary>
@@ -72,9 +74,11 @@ namespace GEX.Resource
         /// </summary>
         /// <param name="path">资源路径,类似"Assets/Res/XXXX.yyy"</param>
         /// <param name="weight">权重，用于计算进度</param>
-        public void AddLoader(string path, int weight = 1)
+        public LoadOperation AddLoader(string path, int weight = 1)
         {
-            this.AddLoader(GResource.LoadBundleAsync(path) , weight);            
+            LoadOperation loadOpt = GResource.LoadAssetAsync(path);
+            this.AddLoader(loadOpt, weight);
+            return loadOpt;
         }
 
         public override void OnLoad()
@@ -121,7 +125,7 @@ namespace GEX.Resource
             
             progress = (weigeting + completeWeight) / Weight;
 
-            return !IsDone();
+            return IsDone() == false;
         }
 
         public override object Current

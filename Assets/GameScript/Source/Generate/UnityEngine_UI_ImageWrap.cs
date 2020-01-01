@@ -352,7 +352,7 @@ public class UnityEngine_UI_ImageWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Image obj = (UnityEngine.UI.Image)o;
-			float ret = obj.eventAlphaThreshold;
+			float ret = obj.alphaHitTestMinimumThreshold;
 			LuaDLL.lua_pushnumber(L, ret);
 			return 1;
 		}
@@ -733,7 +733,7 @@ public class UnityEngine_UI_ImageWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Image obj = (UnityEngine.UI.Image)o;
 			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
-			obj.eventAlphaThreshold = arg0;
+			obj.alphaHitTestMinimumThreshold = arg0;
 			return 0;
 		}
 		catch(Exception e)

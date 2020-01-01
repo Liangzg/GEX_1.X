@@ -21,7 +21,7 @@ namespace LuaFramework {
 
 #if ASYNC_MODE
         /// <summary>
-        /// ´´½¨Ãæ°å£¬ÇëÇó×ÊÔ´¹ÜÀíÆ÷
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½å£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         /// <param name="type"></param>
         public void CreatePanel(string name, LuaFunction func = null) {
@@ -50,13 +50,13 @@ namespace LuaFramework {
         }
 #else
         /// <summary>
-        /// ´´½¨Ãæ°å£¬ÇëÇó×ÊÔ´¹ÜÀíÆ÷
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½å£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         /// <param name="type"></param>
         public void CreatePanel(string name, LuaFunction func = null) {
             string assetName = name + "Panel";
             GameObject prefab = ResManager.LoadAsset<GameObject>(name, assetName);
-            if (Parent.FindChild(name) != null || prefab == null) {
+            if (Parent.Find(name) != null || prefab == null) {
                 return;
             }
             GameObject go = Instantiate(prefab) as GameObject;
